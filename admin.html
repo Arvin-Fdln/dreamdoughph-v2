@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Dough - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/admin-style.css?v=3.5">
+    <link rel="icon" type="image/x-icon" href="dd.png">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+         <div class="sidebar-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <img src="dd.png" alt="Dream Dough Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🍰';">
+                </div>
+                <div>
+                    <h2>Dream Dough</h2>
+                    <p>Admin Panel</p>
+                </div>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="dashboard" title="Alt+1">
+                <span class="icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-section="menu" title="Alt+2">
+                <span class="icon">🍰</span>
+                <span>Menu Items</span>
+            </a>
+            <a href="#" class="nav-item" data-section="custom-items" title="Alt+3">
+                <span class="icon">🎂</span>
+                <span>Custom Items</span>
+            </a>
+            <a href="#" class="nav-item" data-section="orders" title="Alt+4">
+                <span class="icon">📋</span>
+                <span>Pre-Orders</span>
+            </a>
+            <a href="#" class="nav-item" data-section="custom-orders" title="Alt+5">
+                <span class="icon">🎨</span>
+                <span>Custom Orders</span>
+            </a>
+            <a href="#" class="nav-item" data-section="analytics" title="Alt+6">
+                <span class="icon">📈</span>
+                <span>Analytics</span>
+            </a>
+            <a href="#" class="nav-item" data-section="settings" title="Alt+7">
+                <span class="icon">⚙️</span>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="logoutBtn" class="logout-btn">🚪 Logout</button>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" onclick="closeMobileMenu()"></div>
+
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Header with Live Timer -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="menu-toggle" id="menuToggle">☰</button>
+                <h1 id="pageTitle">Dashboard Overview</h1>
+            </div>
+            <div class="header-right">
+                <div class="live-timer" id="liveTimer">
+                    <div class="current-time">Loading...</div>
+                    <div class="reset-countdown">⏰ Calculating...</div>
+                </div>
+                <div class="user-dropdown">
+                    <div class="user-avatar" id="userAvatar">
+                        <img src="dd.png" alt="Admin" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">
+                    </div>
+                    <div class="user-dropdown-content" id="userDropdown">
+                        <div class="user-dropdown-header">
+                            <div class="user-dropdown-email" id="dropdownEmail">admin@dreamdough.com</div>
+                            <div class="user-dropdown-role">Administrator</div>
+                        </div>
+                        <button class="user-dropdown-item" onclick="logout()">
+                            <span class="icon">🚪</span>
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="content-section active">
+            <div class="dashboard-container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">📋</div>
+                        <h3>Pending Orders</h3>
+                        <p class="stat-number" id="pendingOrders">0</p>
+                        <p class="stat-label">Awaiting Confirmation</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <h3>Confirmed Orders</h3>
+                        <p class="stat-number" id="confirmedOrders">0</p>
+                        <p class="stat-label">Ready for Pickup</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💰</div>
+                        <h3>Today's Revenue</h3>
+                        <p class="stat-number">₱<span id="totalRevenue">0</span></p>
+                        <p class="stat-label">Resets at Midnight</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🍰</div>
+                        <h3>Menu Items</h3>
+                        <p class="stat-number" id="totalProducts">0</p>
+                        <p class="stat-label">In Catalog</p>
+                    </div>
+                </div>
+
+                <div class="dashboard-sections">
+                    <!-- Today's Timeline -->
+                    <div class="timeline-section">
+                        <h3>Today's Orders</h3>
+                        <div class="timeline-filters">
+                            <button class="filter-btn active" data-filter="all" onclick="filterTimeline('all')">All</button>
+                            <button class="filter-btn" data-filter="pending" onclick="filterTimeline('pending')">Pending</button>
+                            <button class="filter-btn" data-filter="confirmed" onclick="filterTimeline('confirmed')">Confirmed</button>
+                            <button class="filter-btn" data-filter="ready" onclick="filterTimeline('ready')">Ready</button>
+                            <button class="filter-btn" data-filter="cancelled" onclick="filterTimeline('cancelled')">Cancelled</button>
+                        </div>
+                        <div id="todayTimeline" class="timeline-container">
+                            <!-- Orders will load here -->
+                        </div>
+                    </div>
+
+                    <!-- Payment Overview -->
+                    <div class="payment-overview">
+                        <h3>Payment Status</h3>
+                        <div class="payment-stats">
+                            <div class="payment-stat paid">
+                                <span class="payment-icon">💵</span>
+                                <span class="payment-count" id="paidCount">0</span>
+                                <span class="payment-label">Paid Today</span>
+                            </div>
+                            <div class="payment-stat unpaid">
+                                <span class="payment-icon">⏳</span>
+                                <span class="payment-count" id="unpaidCount">0</span>
+                                <span class="payment-label">Awaiting Payment</span>
+                            </div>
+                            <div class="payment-stat total">
+                                <span class="payment-icon">💰</span>
+                                <span class="payment-count">₱<span id="todayRevenue">0</span></span>
+                                <span class="payment-label">Today's Revenue</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Split Dashboard Layout -->
+                <div class="dashboard-split">
+                    <!-- Recent Orders -->
+                    <div class="recent-section">
+                        <h3>Recent Pre-Orders</h3>
+                        <div id="recentOrdersList" class="orders-list">
+                            <p class="empty-message">Loading orders...</p>
+                        </div>
+                    </div>
+
+                    <!-- Website Preview -->
+                    <div class="preview-section">
+                        <h3>
+                            <span>Live Website Preview</span>
+                            <div class="preview-controls">
+                                <button onclick="refreshPreview()" title="Refresh Preview">🔄</button>
+                                <button onclick="openWebsite()" title="Open in New Tab">🔗</button>
+                            </div>
+                        </h3>
+                        <div class="website-preview-frame">
+                            <iframe id="websitePreview" src="index.html" title="Dream Dough Website Preview"></iframe>
+                        </div>
+                        
+                        <a href="index.html" target="_blank" class="preview-mobile-button">
+                            <span class="icon">🍰</span>
+                            <span class="title">View Dream Dough</span>
+                            <span class="subtitle">See your live website →</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Menu Items Section -->
+<section id="menu" class="content-section">
+    <div class="section-header">
+        <button class="btn-primary btn-add-item" id="addProductBtn">
+            <span class="btn-icon">+</span>
+            <span class="btn-text">Add New Item</span>
+        </button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="menu-stats-grid">
+        <div class="menu-stat-card">
+            <div class="menu-stat-icon">📦</div>
+            <div class="menu-stat-info">
+                <div class="menu-stat-value" id="totalMenuItems">0</div>
+                <div class="menu-stat-label">Total Items</div>
+            </div>
+        </div>
+        <div class="menu-stat-card">
+            <div class="menu-stat-icon">🎂</div>
+            <div class="menu-stat-info">
+                <div class="menu-stat-value" id="cakesCount">0</div>
+                <div class="menu-stat-label">Cakes</div>
+            </div>
+        </div>
+        <div class="menu-stat-card">
+            <div class="menu-stat-icon">🍪</div>
+            <div class="menu-stat-info">
+                <div class="menu-stat-value" id="cookiesCount">0</div>
+                <div class="menu-stat-label">Cookies</div>
+            </div>
+        </div>
+        <div class="menu-stat-card">
+            <div class="menu-stat-icon">🧁</div>
+            <div class="menu-stat-info">
+                <div class="menu-stat-value" id="cupcakesCount">0</div>
+                <div class="menu-stat-label">Cupcakes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="menu-filters">
+        <div class="search-container">
+            <div class="search-icon">🔍</div>
+            <input type="text" id="productSearch" placeholder="Search menu items..." class="search-box">
+        </div>
+        <div class="filter-actions">
+            <select id="categoryFilter" class="filter-select">
+                <option value="">All Categories</option>
+                <option value="cakes">Cakes</option>
+                <option value="cookies">Cookies</option>
+                <option value="cupcakes">Cupcakes</option>
+            </select>
+        </div>
+    </div>
+  
+    <!-- Menu Items Grid -->
+    <div id="menuItemsGrid" class="menu-items-grid active">
+        <!-- Items will load here -->
+        <div class="empty-state">
+            <div class="empty-icon">🍰</div>
+            <h3>No menu items yet</h3>
+            <p>Start by adding your first menu item</p>
+            <button class="btn-primary btn-add-first" id="addFirstItemBtn">
+                + Add First Item
+            </button>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="quick-stats">
+        <div class="quick-stat">
+            <span class="quick-stat-icon">💰</span>
+            <div class="quick-stat-info">
+                <div class="quick-stat-value">₱<span id="averagePrice">0.00</span></div>
+                <div class="quick-stat-label">Average Price</div>
+            </div>
+        </div>
+        <div class="quick-stat">
+            <span class="quick-stat-icon">⭐</span>
+            <div class="quick-stat-info">
+                <div class="quick-stat-value" id="mostExpensive">-</div>
+                <div class="quick-stat-label">Most Expensive</div>
+            </div>
+        </div>
+        <div class="quick-stat">
+            <span class="quick-stat-icon">📈</span>
+            <div class="quick-stat-info">
+                <div class="quick-stat-value" id="lastUpdated">-</div>
+                <div class="quick-stat-label">Last Updated</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Custom Items Section -->
+        <section id="custom-items" class="content-section">
+            <div class="section-header" style="display: flex; align-items: center; gap: 1rem;">
+                <button class="btn-primary btn-add-item" id="addCustomItemBtn">
+                    <span class="btn-icon">+</span>
+                    <span class="btn-text">Add New Custom Item</span>
+                </button>
+            </div>
+            <div class="menu-stats-grid">
+                <div class="menu-stat-card">
+                    <div class="menu-stat-icon">🎂</div>
+                    <div class="menu-stat-info">
+                        <div class="menu-stat-value" id="totalCustomItems">0</div>
+                        <div class="menu-stat-label">Total Custom Items</div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-filters">
+                <div class="search-container">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-box" id="customItemSearch" placeholder="Search custom items...">
+                </div>
+            </div>
+            <div id="customItemsGrid" class="menu-items-grid active">
+                <!-- Custom items will load here -->
+                <div class="empty-state" id="customItemsEmpty">
+                    <span class="empty-icon">🎂</span>
+                    <h3>No custom items found</h3>
+                    <p>Add a new custom item to feature in the shop.</p>
+                    <button class="btn-primary btn-add-first" id="addCustomItemBtnEmpty">Add New Custom Item</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pre-Orders Section -->
+        <section id="orders" class="content-section">
+            <div class="orders-header-controls">
+                <div class="custom-filters">
+                    <input type="text" id="orderSearch" placeholder="Search orders..." class="search-box">
+                    <select id="orderFilter" class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="pending">Pending Review</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="adjustment">Needs Adjustment</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <select id="paymentFilter" class="filter-select">
+                        <option value="">All Payments</option>
+                        <option value="paid">Paid</option>
+                        <option value="unpaid">Unpaid</option>
+                    </select>
+                </div>
+                
+                <div class="custom-actions">
+                    <button class="view-toggle-btn" onclick="toggleOrderViewMode()">
+                        <span class="icon"></span>
+                        <span>List View</span>
+                    </button>
+                    <button class="bulk-delete-btn" onclick="bulkDeleteCompletedOrders()">
+                        <span class="icon"></span>
+                        <span>Clean Up</span>
+                    </button>
+                    <button class="export-data-btn" onclick="exportOrderData()">
+                        <span class="icon"></span>
+                        <span>Export</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Bar -->
+            <div class="custom-stats-bar" id="orderStatsBar">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalOrders">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="pendingOrdersCount">0</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="confirmedOrdersCount">0</span>
+                    <span class="stat-label">Confirmed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="completedOrdersCount">0</span>
+                    <span class="stat-label">Completed</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="unpaidOrdersCount">0</span>
+                    <span class="stat-label">Unpaid</span>
+                </div>
+            </div>
+
+            <!-- Orders Grid -->
+            <div id="ordersGrid" class="custom-orders-grid">
+                <p class="empty-message">Loading orders...</p>
+            </div>
+
+            <!-- Orders List View (Hidden by default) -->
+            <div id="ordersList" class="custom-orders-list" style="display: none;">
+                <!-- Table view will go here -->
+            </div>
+        </section>
+
+        <!-- Custom Orders Section -->
+        <section id="custom-orders" class="content-section">
+            <div class="orders-header-controls">
+                <div class="custom-filters">
+                    <input type="text" id="customOrderSearch" placeholder="Search custom orders..." class="search-box">
+                    <select id="customOrderFilter" class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="pending_quote">Awaiting Quote</option>
+                        <option value="quoted">Quoted</option>
+                        <option value="pending">Pending Review</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="adjustment">Needs Adjustment</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                
+                <div class="custom-actions">
+                    <button class="view-toggle-btn" onclick="toggleCustomViewMode()">
+                        <span class="icon"></span>
+                        <span>List View</span>
+                    </button>
+                    <button class="bulk-quote-btn" onclick="bulkSendQuotes()">
+                        <span class="icon"></span>
+                        <span>Bulk Quote</span>
+                    </button>
+                    <button class="bulk-delete-btn" onclick="bulkDeleteCustomOrders()">
+                        <span class="icon"></span>
+                        <span>Clean Up</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Bar -->
+            <div class="custom-stats-bar" id="customStatsBar">
+                <div class="stat-item">
+                    <span class="stat-value" id="totalCustomOrders">0</span>
+                    <span class="stat-label">Total</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="awaitingQuote">0</span>
+                    <span class="stat-label">Awaiting Quote</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="quotedOrders">0</span>
+                    <span class="stat-label">Quoted</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="pendingCustom">0</span>
+                    <span class="stat-label">Pending</span>
+                </div>
+            </div>
+
+            <!-- Custom Orders Grid -->
+            <div id="customOrdersGrid" class="custom-orders-grid">
+                <p class="empty-message">Loading custom orders...</p>
+            </div>
+
+            <!-- Custom Orders List View (Hidden by default) -->
+            <div id="customOrdersList" class="custom-orders-list" style="display: none;">
+                <!-- Table view will go here -->
+            </div>
+        </section>
+
+        <!-- Analytics Section with Date Filters -->
+        <section id="analytics" class="content-section">
+            <div class="date-filter-bar">
+                <div class="date-filter-title">
+                    <span>📅</span>
+                    <span>Filter by Date Range</span>
+                </div>
+                <div class="date-filter-controls">
+                    <div class="date-preset-buttons">
+                        <button class="btn-date-preset active" data-filter="today">Today</button>
+                        <button class="btn-date-preset" data-filter="week">This Week</button>
+                        <button class="btn-date-preset" data-filter="month">This Month</button>
+                    </div>
+                    <div class="custom-date-inputs">
+                        <input type="date" id="customStartDate" placeholder="Start Date">
+                        <input type="date" id="customEndDate" placeholder="End Date">
+                        <button id="applyCustomDate">Apply</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add to analytics section, after the existing charts -->
+            <div class="analytics-layout">
+                <!-- Left Column - Keep existing charts -->
+                <div class="analytics-charts-column">
+                    <div class="analytics-card chart-card">
+                        <h3>📈 Monthly Sales Trend</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="monthlySalesChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card chart-card">
+                        <h3>📊 Sales by Category</h3>
+                        <div class="chart-wrapper">
+                            <canvas id="categorySalesChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <!-- NEW: Product Performance Details -->
+                    <div class="analytics-card">
+                        <h3>⭐ Product Performance Details</h3>
+                        <div class="performance-filters">
+                            <button class="filter-btn active" onclick="filterPerformance('revenue')">By Revenue</button>
+                            <button class="filter-btn" onclick="filterPerformance('quantity')">By Quantity</button>
+                            <button class="filter-btn" onclick="filterPerformance('profit')">By Profit</button>
+                        </div>
+                        <div id="productPerformanceDetails" class="performance-details">
+                            <!-- Product details will load here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Keep existing stats -->
+                <div class="analytics-stats-column">
+                    <div class="analytics-card chart-card">
+                        <h3>💰 Revenue Distribution</h3>
+                        <div class="chart-wrapper-pie">
+                            <canvas id="revenuePieChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card stats-card">
+                        <h3>📋 Order Summary</h3>
+                        <div id="orderSummaryStats" class="summary-stats-grid">
+                            <!-- Existing stats -->
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <h3>⭐ Top 5 Products</h3>
+                        <div id="topProductsList" class="top-products-list">
+                            <!-- Existing top products -->
+                        </div>
+                    </div>
+                    
+                    <!-- NEW: Performance Metrics -->
+                    <div class="analytics-card">
+                        <h3>📈 Performance Metrics</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-icon">📊</span>
+                                <span class="metric-value" id="avgOrderValue">₱0.00</span>
+                                <span class="metric-label">Avg Order Value</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-icon">🛒</span>
+                                <span class="metric-value" id="totalItemsSold">0</span>
+                                <span class="metric-label">Items Sold</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-icon">⭐</span>
+                                <span class="metric-value" id="bestProduct">-</span>
+                                <span class="metric-label">Best Seller</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-icon">📦</span>
+                                <span class="metric-value" id="uniqueProducts">0</span>
+                                <span class="metric-label">Products Sold</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="content-section">
+            <div class="settings-grid">
+                <!-- Business Information -->
+                <div class="settings-card">
+                    <h3>
+                        <span><span class="icon">🏢</span> Business Information</span>
+                    </h3>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="businessEmail" value="dreamdoughph@gmail.com" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="businessPhone" value="09206171784" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Address</label>
+                        <textarea id="businessAddress" class="form-input" rows="3">Angono, Calabarzon, Philippines</textarea>
+                    </div>
+                    <div class="settings-actions">
+                        <button class="btn-primary" onclick="saveBusinessSettings()">Save Changes</button>
+                    </div>
+                </div>
+
+                <!-- Store Hours -->
+                <div class="settings-card">
+                    <h3>
+                        <span><span class="icon">🕐</span> Store Hours</span>
+                        <div class="settings-header-actions">
+                            <button class="btn-settings-action btn-add" onclick="openEditHoursModal()">✏️ Edit Hours</button>
+                        </div>
+                    </h3>
+                    <div id="storeHoursDisplay" class="hours-display empty">
+                        No store hours set yet
+                    </div>
+                </div>
+
+                <!-- Social Media Links -->
+                <div class="settings-card">
+                    <h3>
+                        <span><span class="icon">📱</span> Social Media</span>
+                        <div class="settings-header-actions">
+                            <button class="btn-settings-action btn-add" onclick="openAddSocialModal()">+ Add Social</button>
+                        </div>
+                    </h3>
+                    <div id="socialLinksList" class="social-links-list">
+                        <div class="empty-state">
+                            <span class="icon">📱</span>
+                            <p>No social media links added yet</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Security -->
+                <div class="settings-card">
+                    <h3>
+                        <span><span class="icon">🔒</span> Account Security</span>
+                    </h3>
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" id="currentPassword" placeholder="Enter current password" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confirmPassword" placeholder="Confirm new password" class="form-input">
+                    </div>
+                    <div class="settings-actions">
+                        <button class="btn-primary" onclick="changePassword()">Update Password</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modals -->
+        <!-- Store Hours Modal -->
+        <div id="hoursModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeHoursModal()">✕</span>
+                <h2>Edit Store Hours</h2>
+                <form id="hoursForm" onsubmit="handleHoursSubmit(event)">
+                    <div class="form-group">
+                        <label>Store Hours</label>
+                        <textarea id="storeHoursText" class="form-input" rows="6" placeholder="Example:
+Mon - Sat: 8AM - 10PM
+Sunday: 9AM - 9PM"></textarea>
+                        <small style="color: var(--light-brown); display: block; margin-top: 0.5rem;">
+                            Type your store hours exactly as you want them to appear on your website.
+                        </small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeHoursModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Hours</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Social Media Modal -->
+        <div id="socialModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeSocialModal()">✕</span>
+                <h2 id="socialModalTitle">Add Social Media</h2>
+                <form id="socialForm" onsubmit="handleSocialSubmit(event)">
+                    <div class="form-group">
+                        <label>Platform</label>
+                        <select id="socialPlatform" required class="form-input">
+                            <option value="">Select Platform</option>
+                            <option value="Facebook">📘 Facebook</option>
+                            <option value="Instagram">📷 Instagram</option>
+                            <option value="Twitter">🦅 Twitter / X</option>
+                            <option value="TikTok">🎵 TikTok</option>
+                            <option value="YouTube">📺 YouTube</option>
+                            <option value="LinkedIn">💼 LinkedIn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Profile URL</label>
+                        <input type="url" id="socialUrl" required class="form-input" placeholder="https://facebook.com/dreamdoughph">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeSocialModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Link</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Menu Item Modal -->
+        <div id="productModal" class="modal">
+            <div class="modal-content" style="max-width: 650px;">
+                <span class="close-modal" onclick="closeProductModal()">✕</span>
+                <h2 id="modalTitle">Add New Menu Item</h2>
+                <form id="productForm" onsubmit="handleProductSubmit(event)">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="productName" required class="form-input" placeholder="e.g., Chocolate Dream Cake">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="productDescription" required class="form-input" placeholder="Describe your menu item"></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="productCategory" required class="form-input">
+                                <option value="">Select Category</option>
+                                <option value="cakes">Cakes</option>
+                                <option value="cookies">Cookies</option>
+                                <option value="cupcakes">Cupcakes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Price (₱)</label>
+                            <input type="number" id="productPrice" required step="1" min="1" max="99999" inputmode="numeric" pattern="\d+" title="Enter a whole number between 1 and 99999" class="form-input" placeholder="1299">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div id="imagePreviewContainer" style="margin-bottom: 1rem;">
+                            <div id="imagePreview" style="width: 100%; height: 250px; background: var(--soft-cream); border: 2px dashed var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                <span style="color: var(--light-brown); font-size: 3rem;">🍰</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="productImage" class="form-input">
+                        <button type="button" class="btn-primary" onclick="openImageCropper()" style="width: 100%;">
+                            📷 Upload & Crop Image
+                        </button>
+                        <small style="color: var(--light-brown); display: block; margin-top: 0.5rem;">
+                            Click to upload and crop your image to perfect size
+                        </small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeProductModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Image Cropper Modal -->
+        <div id="cropperModal" class="modal">
+            <div class="modal-content" style="max-width: 700px;">
+                <span class="close-modal" onclick="closeCropperModal()">✕</span>
+                <h2>Crop Your Image</h2>
+                <p style="color: var(--light-brown); margin-bottom: 1rem;">
+                    Adjust the crop area to frame your product perfectly. All products will be 1:1 square ratio.
+                </p>
+                
+                <div style="margin-bottom: 1rem;">
+                    <input type="file" id="imageUploadInput" accept="image/*" style="display: none;" onchange="loadImageToCrop(event)">
+                    <button type="button" class="btn-primary" onclick="document.getElementById('imageUploadInput').click()">
+                        Choose Image from Device
+                    </button>
+                </div>
+                
+                <div id="cropperContainer" style="max-height: 400px; overflow: hidden; background: #000; border-radius: 10px; display: none;">
+                    <img id="imageToCrop" style="max-width: 100%; display: block;">
+                </div>
+                
+                <div id="cropperActions" style="margin-top: 1rem; display: none;">
+                    <button type="button" class="btn-secondary" onclick="closeCropperModal()">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="uploadCroppedImage()">✓ Use This Image</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Review Modal - SIMPLIFIED -->
+        <div id="orderModal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeOrderModal()">✕</span>
+                <h2>📋 Order Details</h2>
+                
+                <!-- Customer Info Card -->
+                <div class="customer-card">
+                    <div class="customer-avatar">👤</div>
+                    <div class="customer-info">
+                        <h3 id="customerNameDisplay">Customer Name</h3>
+                        <div class="customer-contact">
+                            <span class="contact-item" id="customerPhoneDisplay">📱 Loading...</span>
+                            <span class="contact-item" id="customerEmailDisplay">📧 Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary-card">
+                    <h4>🛍️ Order Summary</h4>
+                    <div class="order-items" id="orderItemsDisplay">
+                        <!-- Items will be loaded here -->
+                    </div>
+                    <div class="order-total">
+                        <strong>Total: <span id="orderTotalDisplay">₱0.00</span></strong>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h4> Quick Actions</h4>
+                    <div class="action-buttons-grid">
+                        <button class="action-btn confirm-btn" onclick="quickAction('confirm')">
+                             Confirm Order
+                        </button>
+                        <button class="action-btn adjust-btn" onclick="quickAction('adjustment')">
+                             Needs Adjustment
+                        </button>
+                        <button class="action-btn complete-btn" onclick="quickAction('complete')">
+                             Mark Complete
+                        </button>
+                        <button class="action-btn cancel-btn" onclick="quickAction('cancel')">
+                             Cancel Order
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Status & Notes -->
+                <div class="status-section">
+                    <div class="form-group">
+                        <label>📊 Current Status</label>
+                        <div class="status-display" id="currentStatusDisplay">
+                            <span class="status-badge status-pending">Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔄 Change Status</label>
+                        <select id="orderStatus" class="form-input status-select">
+                            <option value="pending"> Pending Review</option>
+                            <option value="confirmed"> Confirmed</option>
+                            <option value="adjustment"> Needs Adjustment</option>
+                            <option value="completed"> Completed</option>
+                            <option value="cancelled"> Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📝 Internal Notes</label>
+                        <textarea id="orderNotes" class="form-input" placeholder="Add notes about this order..." rows="3"></textarea>
+                    </div>
+                </div>
+
+                <!-- Customer Message -->
+                <div class="customer-message-section">
+                    <label>📧 Message to Customer (Optional)</label>
+                    <textarea id="orderReply" class="form-input" placeholder="This message will be emailed to the customer..." rows="3"></textarea>
+                    <small>💡 Keep it friendly! This will be sent via email.</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeOrderModal()">Close</button>
+                    <button type="button" class="btn-primary" onclick="updateOrder()">Update Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Order Modal -->
+        <div id="customOrderModal" class="modal">
+            <div class="modal-content" style="max-width: 700px;">
+                <span class="close-modal" onclick="closeCustomOrderModal()">✕</span>
+                <h2>🎨 Custom Order Details</h2>
+                
+                <!-- Customer Info Card -->
+                <div class="customer-card">
+                    <div class="customer-avatar">👤</div>
+                    <div class="customer-info">
+                        <h3 id="customCustomerNameDisplay">Customer Name</h3>
+                        <div class="customer-contact">
+                            <span class="contact-item" id="customCustomerPhoneDisplay">📱 Loading...</span>
+                            <span class="contact-item" id="customCustomerEmailDisplay">📧 Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reference Image -->
+                <div class="reference-image-section" id="referenceImageSection">
+                    <h4>📷 Reference Image</h4>
+                    <div class="image-preview-container">
+                        <img id="referenceImagePreview" src="" alt="Reference Image" 
+                            onclick="openImageFullscreen(this.src)" 
+                            style="cursor: pointer; max-width: 100%; max-height: 300px; border-radius: 8px;">
+                        <p class="image-note" id="imageNote">Click image to view full size</p>
+                    </div>
+                </div>
+
+                <!-- Order Details -->
+                <div class="order-summary-card">
+                    <h4>🛍️ Custom Order Details</h4>
+                    <div class="custom-order-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Product Type:</span>
+                            <span id="customProductType">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Quantity:</span>
+                            <span id="customQuantity">1</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Size:</span>
+                            <span id="customSize">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Flavor:</span>
+                            <span id="customFlavor">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Pickup Date:</span>
+                            <span id="customPickupDate">-</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Pickup Time:</span>
+                            <span id="customPickupTime">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design Description -->
+                <div class="design-description">
+                    <h4>✨ Design Description</h4>
+                    <div class="description-content" id="customDesignDescription">
+                        Loading description...
+                    </div>
+                </div>
+
+                <!-- Additional Notes -->
+                <div class="additional-notes" id="additionalNotesSection">
+                    <h4>📝 Additional Notes</h4>
+                    <div class="notes-content" id="customAdditionalNotes">
+                        No additional notes
+                    </div>
+                </div>
+
+                <!-- Price & Quote Section -->
+                <div class="price-quote-section">
+                    <h4>💰 Set Price & Quote</h4>
+                    <div class="form-group">
+                        <label>Item Price (₱)</label>
+                        <input type="number" id="customItemPrice" class="form-input" 
+                            placeholder="0" step="1" min="1" max="99999" inputmode="numeric" pattern="\d+">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Price (₱)</label>
+                        <input type="number" id="customTotalPrice" class="form-input" 
+                            placeholder="0" step="1" min="0" max="99999" inputmode="numeric" pattern="\d+" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Quote Message to Customer</label>
+                        <textarea id="customQuoteMessage" class="form-input" rows="4" placeholder="Hi [Customer], here's your custom order quote..."></textarea>
+                        <small>💡 Tip: Use {name} for customer name, {price} for total price</small>
+                    </div>
+                </div>
+
+                <!-- Status Management -->
+                <div class="status-section">
+                    <div class="form-group">
+                        <label>📊 Current Status</label>
+                        <div class="status-display" id="customCurrentStatusDisplay">
+                            <span class="status-badge status-pending_quote">Awaiting Quote</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>🔄 Change Status</label>
+                        <select id="customOrderStatus" class="form-input status-select">
+                            <option value="pending_quote">⏳ Awaiting Quote</option>
+                            <option value="quoted">💰 Quoted to Customer</option>
+                            <option value="pending">📝 Pending Review</option>
+                            <option value="confirmed">✅ Confirmed</option>
+                            <option value="adjustment">✏️ Needs Adjustment</option>
+                            <option value="completed">🎉 Completed</option>
+                            <option value="cancelled">❌ Cancelled</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>📝 Internal Notes</label>
+                        <textarea id="customOrderNotes" class="form-input" placeholder="Add notes about this custom order..." rows="3"></textarea>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h4> Quick Actions</h4>
+                    <div class="action-buttons-grid">
+                        <button class="action-btn confirm-btn" onclick="customQuickAction('quote')">
+                             Send Quote
+                        </button>
+                        <button class="action-btn adjust-btn" onclick="customQuickAction('confirm')">
+                             Confirm Order
+                        </button>
+                        <button class="action-btn complete-btn" onclick="customQuickAction('adjust')">
+                             Needs Adjustment
+                        </button>
+                        <button class="action-btn cancel-btn" onclick="customQuickAction('cancel')">
+                             Cancel Order
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCustomOrderModal()">Close</button>
+                    <button type="button" class="btn-primary" onclick="updateCustomOrder()">Update Order</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Fullscreen Modal -->
+        <div id="imageFullscreenModal" class="modal" onclick="closeImageFullscreen()">
+            <div class="modal-content" style="background: transparent; box-shadow: none; max-width: 90%;">
+                <span class="close-modal" onclick="closeImageFullscreen()" style="color: white; position: absolute; top: 20px; right: 20px;">✕</span>
+                <img id="fullscreenImage" src="" alt="Full size image" style="max-width: 100%; max-height: 90vh; border-radius: 8px;">
+            </div>
+        </div>
+
+        <!-- Custom Item Modal -->
+        <div id="customItemModal" class="modal">
+            <div class="modal-content" style="max-width: 650px;">
+                <span class="close-modal" onclick="closeCustomItemModal()">✕</span>
+                <h2 id="customItemModalTitle">Add New Custom Item</h2>
+                <form id="customItemForm" onsubmit="handleCustomItemSubmit(event)">
+                    <div class="form-group">
+                        <label>Item Name</label>
+                        <input type="text" id="customItemName" required class="form-input" placeholder="e.g., Custom Birthday Cake Design">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="customItemDescription" required class="form-input" placeholder="Describe this custom item - what makes it special?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Product Image</label>
+                        <div id="customImagePreviewContainer" style="margin-bottom: 1rem;">
+                            <div id="customImagePreview" style="width: 100%; height: 250px; background: var(--soft-cream); border: 2px dashed var(--gold); border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                                <span style="color: var(--light-brown); font-size: 3rem;">🎂</span>
+                            </div>
+                        </div>
+                        <input type="hidden" id="customItemImage" class="form-input">
+                        <button type="button" class="btn-primary" onclick="openCustomImageCropper()" style="width: 100%;">
+                            📷 Upload & Crop Image
+                        </button>
+                        <small style="color: var(--light-brown); display: block; margin-top: 0.5rem;">
+                            Click to upload and crop your image to perfect size
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Notes (Optional)</label>
+                        <textarea id="customItemNotes" class="form-input" placeholder="Any additional notes about this custom item..." rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeCustomItemModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Custom Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Custom Image Cropper Modal -->
+        <div id="customCropperModal" class="modal">
+            <div class="modal-content" style="max-width: 700px;">
+                <span class="close-modal" onclick="closeCustomCropperModal()">✕</span>
+                <h2>Crop Your Image</h2>
+                <p style="color: var(--light-brown); margin-bottom: 1rem;">
+                    Adjust the crop area to frame your product perfectly. All products will be 1:1 square ratio.
+                </p>
+                
+                <div style="margin-bottom: 1rem;">
+                    <input type="file" id="customImageUploadInput" accept="image/*" style="display: none;" onchange="loadCustomImageToCrop(event)">
+                    <button type="button" class="btn-primary" onclick="document.getElementById('customImageUploadInput').click()">
+                        Choose Image from Device
+                    </button>
+                </div>
+                
+                <div id="customCropperContainer" style="max-height: 400px; overflow: hidden; background: #000; border-radius: 10px; display: none;">
+                    <img id="customImageToCrop" style="max-width: 100%; display: block;">
+                </div>
+                
+                <div id="customCropperActions" style="margin-top: 1rem; display: none;">
+                    <button type="button" class="btn-secondary" onclick="closeCustomCropperModal()">Cancel</button>
+                    <button type="button" class="btn-primary" onclick="uploadCustomCroppedImage()">✓ Use This Image</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-analytics-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-storage-compat.js"></script>
+
+    <!-- Cropper.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Config and Admin JS -->
+    <script src="js/firebase-config.js"></script>
+    <script src="js/admin.js?v=3.5"></script>
+
+    <script>
+    // Email preview update
+    document.addEventListener('DOMContentLoaded', function() {
+        const emailInput = document.getElementById('customerEmail');
+        if (emailInput) {
+            emailInput.addEventListener('input', function() {
+                document.getElementById('emailPreview').textContent = this.value || 'the customer';
+            });
+        }
+    });
+    </script>
+
+</body>
+</html>

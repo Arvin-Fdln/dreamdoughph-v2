@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DreamDoughPH - Baked Fresh</title>
+    <link rel="stylesheet" href="css/styles.css?v=2.9">
+    <link rel="icon" href="dd.png">
+</head>
+<body>
+    <!-- Sidebar Navigation for Mobile -->
+    <aside class="sidebar" id="mainSidebar">
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <img src="dd.png" alt="Dream Dough Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='🍰';">
+                </div>
+                <div>
+                    <h2>DreamDoughPH</h2>
+                    <p>Menu</p>
+                </div>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#home" class="nav-item" onclick="closeMobileMenu()"><span class="icon">🏠</span><span>Home</span></a>
+            <a href="#cakes" class="nav-item" onclick="closeMobileMenu()"><span class="icon">🎂</span><span>Cakes</span></a>
+            <a href="#cookies" class="nav-item" onclick="closeMobileMenu()"><span class="icon">🍪</span><span>Cookies</span></a>
+            <a href="#cupcakes" class="nav-item" onclick="closeMobileMenu()"><span class="icon">🧁</span><span>Cupcakes</span></a>
+            <a href="customOrder.html" class="nav-item" onclick="closeMobileMenu()"><span class="icon">📝</span><span>Custom Order</span></a>
+            <a href="#about" class="nav-item" onclick="closeMobileMenu()"><span class="icon">ℹ️</span><span>About</span></a>
+        </nav>
+    </aside>
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileMenu()"></div>
+    <script>
+      // Ensure sidebar is hidden on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('mainSidebar').classList.remove('active');
+        document.getElementById('sidebarOverlay').classList.remove('active');
+        document.body.classList.remove('sidebar-open');
+        var hamburger = document.querySelector('.hamburger');
+        if (hamburger) {
+          hamburger.onclick = openMobileMenu;
+        }
+      });
+    </script>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <h1>DreamDoughPH</h1>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cakes">Cakes</a></li>
+                <li><a href="#cookies">Cookies</a></li>
+                <li><a href="#cupcakes">Cupcakes</a></li>
+                <li><a href="#customorders" onclick="window.location.href='customOrder.html'; return false;">Custom Order</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="cart-btn" onclick="toggleCart()">
+                    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <script>
+                // Replace hamburger click to open sidebar
+                document.addEventListener('DOMContentLoaded', function() {
+                    var hamburger = document.querySelector('.hamburger');
+                    if (hamburger) {
+                        hamburger.onclick = openMobileMenu;
+                    }
+                });
+            </script>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Carousel -->
+<section class="hero" id="home">
+    <div class="carousel" id="carousel">
+        <!-- Slide 1: Baguette Shape (long and narrow) -->
+        <div class="carousel-item carousel-item-1" style="background-image: url('bg1.jpg');">
+            <div class="carousel-content">
+                <div style="background: rgba(80, 40, 0, 0.5); padding: 20px 60px; border-radius: 45% 45% 45% 45% / 25% 25% 25% 25%; backdrop-filter: blur(1px); display: inline-block; border: 4px solid rgba(210, 150, 80, 0.7); box-shadow: inset 0 3px 0 rgba(200, 130, 60, 0.8), inset 0 -3px 0 rgba(200, 130, 60, 0.8), inset 15px 0 10px rgba(0,0,0,0.1), inset -15px 0 10px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.3); position: relative;">
+                    <h2 style="margin: 0 0 10px 0;">Dream <br> Dough PH</h2>
+                    <p style="margin: 0 0 20px 0;">Baked Fresh Daily with Love</p>
+                    <button class="cta-btn" onclick="document.getElementById('cakes').scrollIntoView({behavior: 'smooth'})">
+                        Explore Our Creations
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 2: Sliced Bread Shape (square with slight rounded corners) -->
+        <div class="carousel-item carousel-item-2" style="background-image: url('bg2.jpg');">
+            <div class="carousel-content">
+                <div style="background: rgba(80, 40, 0, 0.5); padding: 35px 40px; border-radius: 8% 8% 8% 8%; backdrop-filter: blur(1px); display: inline-block; border: 5px solid rgba(200, 140, 70, 0.8); border-left: 3px solid rgba(180, 120, 50, 0.9); box-shadow: inset 2px 0 0 rgba(255, 220, 180, 0.3), inset 0 2px 0 rgba(255, 220, 180, 0.2), 0 5px 15px rgba(0,0,0,0.3), inset 0 0 30px rgba(255, 235, 200, 0.1);">
+                    <h2 style="margin: 0 0 10px 0;">Artisan Cakes</h2>
+                    <p style="margin: 0 0 20px 0;">Custom Made for Your Special Moments</p>
+                    <button class="cta-btn" onclick="document.getElementById('cakes').scrollIntoView({behavior: 'smooth'})">
+                        Order Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Chiffon Cake Shape (tall and airy) -->
+        <div class="carousel-item carousel-item-3" style="background-image: url('bg3.jpg');">
+            <div class="carousel-content">
+                <div style="background: rgba(80, 40, 0, 0.4); padding: 40px 35px; border-radius: 50% 50% 48% 52% / 35% 35% 65% 65%; backdrop-filter: blur(1px); display: inline-block; border-top: 5px solid rgba(255, 220, 150, 0.8); border-bottom: 4px solid rgba(180, 130, 60, 0.8); border-left: 3px solid rgba(200, 150, 80, 0.7); border-right: 3px solid rgba(200, 150, 80, 0.7); box-shadow: inset 0 10px 20px rgba(255, 240, 200, 0.2), inset 0 -5px 15px rgba(0,0,0,0.15), 0 8px 20px rgba(0,0,0,0.3);">
+                    <h2 style="margin: 0 0 10px 0;">Fresh Daily</h2>
+                    <p style="margin: 0 0 20px 0;">From Our Oven to Your Table</p>
+                    <button class="cta-btn" onclick="document.getElementById('cakes').scrollIntoView({behavior: 'smooth'})">
+                        Shop Now
+                    </button>
+                </div>   
+            </div>
+        </div>
+    </div>
+    <div class="carousel-indicators">
+        <span class="indicator active" onclick="goToSlide(0)"></span>
+        <span class="indicator" onclick="goToSlide(1)"></span>
+        <span class="indicator" onclick="goToSlide(2)"></span>
+    </div>
+</section>
+
+        <!-- Featured Product Section - BELOW SEARCH BAR -->
+    <section class="featured-section">
+        <div class="featured-container">
+            <div class="featured-badge">
+                <span>What's New</span>
+            </div>
+            
+            <div class="featured-content">
+                <!-- Left Side - Image -->
+                <div class="featured-image" id="featuredImage">
+                    <div class="featured-image-placeholder">🰰</div>
+                </div>
+                
+                <!-- Right Side - Details -->
+                <div class="featured-details">
+                    <div class="featured-category" id="featuredCategory">NEW ARRIVAL</div>
+                    <h2 id="featuredName" class="featured-title">Loading...</h2>
+                    <p id="featuredDescription" class="featured-text">
+                        Discover our latest creation
+                    </p>
+                    <div class="featured-price-row">
+                        <div class="featured-price" id="featuredPrice">₱0.00</div>
+                        <button class="featured-cta" onclick="openFeaturedProduct()">
+                            Shop Now →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cakes Section -->
+    <section class="product-section" id="cakes">
+        <div class="section-header">
+            <h2>Our Signature Cakes</h2>
+            <p>Handcrafted masterpieces for every celebration</p>
+        </div>
+        <div class="product-carousel-wrapper">
+            <div class="product-grid" id="cakesGrid">
+                <!-- Products will be loaded from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookies Section -->
+    <section class="product-section" id="cookies">
+        <div class="section-header">
+            <h2>Artisan Cookies</h2>
+            <p>Crunchy, chewy, and absolutely irresistible</p>
+        </div>
+        <div class="product-carousel-wrapper">
+            <div class="product-grid" id="cookiesGrid">
+                <!-- Products will be loaded from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cupcakes Section -->
+    <section class="product-section" id="cupcakes">
+        <div class="section-header">
+            <h2>Gourmet Cupcakes</h2>
+            <p>Perfect little treats for any occasion</p>
+        </div>
+        <div class="product-carousel-wrapper">
+            <div class="product-grid" id="cupcakesGrid">
+                <!-- Products will be loaded from Firebase -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Customize Orders Section -->
+    <section class="product-section" id="customorders">
+        <div class="section-header">
+            <h2>Customize Orders</h2>
+            <p>Preview our featured custom cakes</p>
+        </div>
+        <div class="product-carousel-wrapper">
+            <div class="product-grid" id="customOrdersGrid">
+                <!-- JS will inject "No custom product has been uploaded" if empty -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+<section class="features-section">
+    <div class="section-header">
+        <h2 style="color: var(--cream);">Why Choose DreamDoughPH?</h2>
+        <p style="color: var(--gold);">Quality ingredients, passion for baking, and love in every bite</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-item clickable-feature" onclick="openModal('ingredientsModal')">
+            <div class="feature-icon">🌟</div>
+            <h3>Premium Ingredients</h3>
+            <p>Only the finest ingredients go into our baked goods</p>
+            <span style="color: var(--gold); font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                Learn More →
+            </span>
+        </div>
+        <div class="feature-item clickable-feature" onclick="openModal('freshnessModal')">
+            <div class="feature-icon">📌</div>
+            <h3>What Makes Us Different</h3>
+            <p>Discover what sets DreamDoughPH apart from the rest</p>
+            <span style="color: var(--gold); font-weight: 600; display: inline-block; margin-top: 0.5rem;">
+                Learn More →
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="about">
+    <div class="footer-content">
+        <!-- Contact Us -->
+        <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p id="footerPhone">📞 Loading...</p>
+            <p id="footerEmail">📧 Loading...</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <!-- Social links will be loaded from Firebase -->
+            </div>
+        </div>
+
+        <!-- Store Hours & Location -->
+        <div class="footer-section">
+            <h3>Store Hours & Location</h3>
+            <p id="footerAddress">📍 Loading...</p>
+            <!-- Store hours will be loaded from Firebase here -->
+        </div>
+
+        <!-- Info -->
+        <div class="footer-section">
+            <h3>Info</h3>
+            <a href="aboutus.html">About Us</a>
+            <a href="faq.html">FAQs</a>
+            <a href="tos.html">Terms and Conditions</a>
+            <a href="refundpolicy.html">Refund Policy</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 DreamDoughPH. All Rights Reserved. | Baked with ❤️ in Antipolo</p>
+    </div>
+</footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="close-modal" onclick="closeModal('cartModal')">&times;</span>
+            <h2>Your Shopping Cart</h2>
+            <div id="cartItems"></div>
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid var(--light-brown);">
+                <h3 style="text-align: right; color: var(--brown);">Total: ₱<span id="cartTotal">0</span></h3>
+                <button class="submit-btn" style="margin-top: 1rem;" onclick="checkout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+<!-- Premium Ingredients Modal - LIGHTER & SMALLER -->
+<div class="modal" id="ingredientsModal">
+    <div class="modal-overlay" onclick="closeModal('ingredientsModal')"></div>
+    <div class="ingredients-modal-content">
+        <button class="modal-close-btn" onclick="closeModal('ingredientsModal')">✕</button>
+        
+        <div class="ingredients-hero">
+            <span class="ingredients-badge">PREMIUM QUALITY</span>
+            <h2>Our Premium Ingredients</h2>
+            <div class="ingredients-divider"></div>
+        </div>
+
+        <div class="ingredients-body">
+            <p class="ingredients-intro">
+                At DreamDoughPH, we believe that exceptional baked goods start with exceptional ingredients. That's why we source only the finest, highest-quality components for all our creations.
+            </p>
+
+            <div class="ingredients-list">
+                <div class="ingredient-item">
+                    <h3>Our Cakes</h3>
+                    <p>Each of our signature cakes is crafted with love using premium European butter, free-range eggs, and the finest imported chocolates. Our flour is specially milled for delicate textures, and we use only pure vanilla extract and natural flavorings.</p>
+                </div>
+
+                <div class="ingredient-item">
+                    <h3>Our Cupcakes</h3>
+                    <p>Our gourmet cupcakes feature the same attention to quality. We use organic dairy, unbleached flour, and real fruit purees for our fillings and frostings. Each cupcake is decorated with buttercream made from scratch.</p>
+                </div>
+
+                <div class="ingredient-item">
+                    <h3>Our Cookies</h3>
+                    <p>Our artisan cookies are made with love using the finest ingredients. We source premium chocolate chunks, organic nuts, and use real butter for that perfect melt-in-your-mouth texture. No artificial flavors or preservatives.</p>
+                </div>
+            </div>
+
+            <div class="ingredients-quote">
+                <div class="quote-mark">"</div>
+                <p>Every treat we bake is made with love, care, and the finest ingredients - because you deserve nothing less than the best.</p>
+            </div>
+        </div>
+
+        <div class="ingredients-footer-bar">
+            Baked with love in Antipolo
+        </div>
+    </div>
+</div>
+
+<!-- What Makes Us Different Modal -->
+<div class="modal" id="freshnessModal">
+    <div class="modal-overlay" onclick="closeModal('freshnessModal')"></div>
+    <div class="ingredients-modal-content">
+        <button class="modal-close-btn" onclick="closeModal('freshnessModal')">✕</button>
+        
+        <div class="ingredients-hero">
+            <span class="ingredients-badge">OUR STORY</span>
+            <h2>What Makes Us Different</h2>
+            <div class="ingredients-divider"></div>
+        </div>
+
+        <div class="ingredients-body">
+            <p class="ingredients-intro">
+                At DreamDoughPH, we're more than just a bakery - we're a family tradition baking with heart and passion.
+            </p>
+
+            <div class="ingredients-list">
+                <div class="ingredient-item">
+                    <h3>👨‍🍳 Family Recipes & Traditions</h3>
+                    <p>Our recipes have been passed down through generations, combining authentic 
+    <span class="secret-word" data-href="Login.html">Filipino</span> 
+    baking traditions with modern twists. Each bite carries the warmth of family memories and the innovation of contemporary techniques.</p>
+                </div>
+
+                <div class="ingredient-item">
+                    <h3>🎨 Handcrafted with Love</h3>
+                    <p>Every single item is personally made by our skilled bakers. We believe in the artisan approach - no mass production, no factory methods. Just honest, handcrafted baking that you can taste in every bite.</p>
+                </div>
+
+                <div class="ingredient-item">
+                    <h3>🌟 Premium Local & Imported Ingredients</h3>
+                    <p>We proudly support local suppliers whenever possible, while also importing specialty items to ensure authentic taste. The best of both worlds - supporting our community while delivering exceptional quality.</p>
+                </div>
+
+                <div class="ingredient-item">
+                    <h3>💝 Made for Your Special Moments</h3>
+                    <p>We treat every order like it's for our own family. Your celebrations become our celebrations, and we pour personal attention to detail into every creation we make for you.</p>
+                </div>
+            </div>
+
+            <div class="ingredients-quote">
+                <div class="quote-mark">"</div>
+                <p>We're not just baking treats - we're creating memories that last a lifetime.</p>
+            </div>
+        </div>
+
+        <div class="ingredients-footer-bar">
+            Proudly serving Antipolo with love since 2018
+        </div>
+    </div>
+</div>
+
+<!-- Updated Checkout Modal with Required Email -->
+<div class="modal" id="checkoutModal">
+    <div class="modal-content" style="max-width: 600px; max-height: 85vh; overflow-y: auto; padding: 2rem;">
+        <span class="close-modal" onclick="closeModal('checkoutModal')" style="position: sticky; top: 0; float: right; font-size: 1.8rem; cursor: pointer; color: var(--light-brown); background: white; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 6px; z-index: 10;">&times;</span>
+        
+        <h2 style="color: var(--brown); text-align: center; margin-bottom: 1.5rem; clear: both;">🛒 Checkout</h2>
+        
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Full Name *</label>
+                <input type="text" id="checkoutName" required style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif;">
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">
+                    Phone Number *
+                    <span style="font-size: 0.85rem; font-weight: 400; color: var(--light-brown); margin-left: 0.5rem;">
+                        (Format: 09XXXXXXXXX)
+                    </span>
+                </label>
+                <input 
+                    type="tel" 
+                    id="checkoutPhone" 
+                    required 
+                    placeholder="09XXXXXXXXX (11 digits)" 
+                    maxlength="11"
+                    pattern="09[0-9]{9}"
+                    style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif; transition: border-color 0.3s;"
+                >
+                <small style="display: block; margin-top: 0.3rem; color: var(--light-brown); font-size: 0.8rem;">
+                    📱 Enter your 11-digit mobile number starting with 09
+                </small>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Email *</label>
+                <input 
+                    type="email" 
+                    id="checkoutEmail" 
+                    required 
+                    placeholder="your@email.com" 
+                    style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif;"
+                >
+                <small style="display: block; margin-top: 0.3rem; color: var(--light-brown); font-size: 0.8rem;">
+                    📧 We'll send order confirmation to this email
+                </small>
+            </div>
+            
+            <div style="margin-bottom: 1rem;">
+                <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Delivery Address (Optional)</label>
+                <textarea id="checkoutAddress" rows="2" placeholder="Complete address for delivery" style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif; resize: vertical;"></textarea>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                <div>
+                    <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Pickup Date *</label>
+                    <input type="date" id="checkoutDate" required style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif;">
+                </div>
+                <div>
+                    <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Pickup Time *</label>
+                    <input type="time" id="checkoutTime" required style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif;">
+                </div>
+            </div>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Special Requests / Notes</label>
+                <textarea id="checkoutNotes" rows="3" placeholder="Any special instructions or customizations..." style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif; resize: vertical;"></textarea>
+            </div>
+            
+            <div style="background: var(--soft-cream); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid var(--gold);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 1.1rem; color: var(--brown); font-weight: 600;">Total Amount:</span>
+                    <span style="font-size: 1.5rem; color: var(--gold); font-weight: bold;">₱<span id="checkoutTotal">0</span></span>
+                </div>
+            </div>
+            
+            <div style="background: #FFF3CD; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem; border-left: 4px solid #FFC107;">
+                <p style="color: var(--brown); font-size: 0.9rem; line-height: 1.6; margin: 0;">
+                    ⚠️ <strong>Note:</strong> This is a pre-order. We will contact you to confirm your order details and arrange payment before processing.
+                </p>
+            </div>
+            
+            <button type="submit" id="checkoutSubmitBtn" class="submit-btn">Place Order</button>
+        </form>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal" id="successModal">
+    <div class="modal-content" style="max-width: 550px;">
+        <span class="close-modal" onclick="closeModal('successModal')">&times;</span>
+        <div id="successOrderSummary"></div>
+        <button onclick="closeModal('successModal')" class="submit-btn" style="margin-top: 1.5rem;">Close</button>
+    </div>
+</div>
+
+<!-- Modern Product Details Modal -->
+<div class="modal" id="productModal">
+    <div class="modal-overlay" onclick="closeModal('productModal')"></div>
+    <div class="product-modal-content">
+        <button class="modal-close-btn" onclick="closeModal('productModal')">✕</button>
+        
+        <div class="product-modal-grid">
+            <!-- Left Side - Image -->
+            <div class="product-modal-image">
+                <div id="productModalImage" class="modal-image-container">
+                    🰰
+                </div>
+            </div>
+            
+            <!-- Right Side - Details -->
+            <div class="product-modal-details">
+                <div class="product-modal-category" id="productModalCategory">CAKES</div>
+                <h2 id="productModalName" class="product-modal-title">Chocolate Dream Cake</h2>
+                <div id="productModalPrice" class="product-modal-price">₱1,299.00</div>
+                
+                <div class="product-modal-description">
+                    <h4>Description</h4>
+                    <p id="productModalDescription">Rich chocolate cake with premium cocoa and smooth frosting.</p>
+                </div>
+                
+                <div class="product-modal-quantity">
+                    <label>Quantity</label>
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeModalQuantity(-1)" class="qty-btn">−</button>
+                        <span id="modalQuantity" class="qty-display">1</span>
+                        <button type="button" onclick="changeModalQuantity(1)" class="qty-btn">+</button>
+                    </div>
+                </div>
+                
+                <button onclick="addToCartFromModal()" class="modal-add-cart-btn">
+                    <span>Add to Cart</span>
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Modern Product Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+}
+
+.product-modal-content {
+    position: relative;
+    background: white;
+    width: 100%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brown);
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-close-btn:hover {
+    background: var(--danger);
+    color: white;
+    transform: rotate(90deg);
+}
+
+.product-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+}
+
+/* Left Side - Image */
+.product-modal-image {
+    background: linear-gradient(135deg, var(--light-brown), var(--gold));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 400px;
+}
+
+.modal-image-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    color: var(--cream);
+    max-height: 450px;
+}
+
+.modal-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Right Side - Details */
+.product-modal-details {
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.product-modal-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--gold);
+    text-transform: uppercase;
+}
+
+.product-modal-title {
+    font-size: 2rem;
+    color: var(--brown);
+    font-weight: 600;
+    line-height: 1.2;
+    margin: 0;
+}
+
+.product-modal-price {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.product-modal-description {
+    padding-top: 1rem;
+    border-top: 1px solid #E8DCC8;
+}
+
+.product-modal-description h4 {
+    font-size: 0.9rem;
+    color: var(--light-brown);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.product-modal-description p {
+    color: var(--brown);
+    line-height: 1.7;
+    font-size: 1rem;
+}
+
+.product-modal-quantity {
+    padding-top: 1rem;
+}
+
+.product-modal-quantity label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--light-brown);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--soft-cream);
+    padding: 0.5rem 1rem;
+    width: fit-content;
+}
+
+.qty-btn {
+    width: 36px;
+    height: 36px;
+    background: white;
+    border: 2px solid var(--gold);
+    color: var(--brown);
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.qty-btn:hover {
+    background: var(--gold);
+    color: white;
+}
+
+.qty-display {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--brown);
+    min-width: 40px;
+    text-align: center;
+}
+
+.modal-add-cart-btn {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    background: var(--brown);
+    color: var(--cream);
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    font-family: 'Georgia', serif;
+}
+
+.modal-add-cart-btn:hover {
+    background: var(--gold);
+    color: var(--brown);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .product-modal-content {
+        max-width: 95%;
+        max-height: 95vh;
+    }
+
+    .product-modal-grid {
+        grid-template-columns: 1fr;
+        overflow-y: auto;
+    }
+
+    .product-modal-image {
+        min-height: 300px;
+        max-height: 300px;
+        padding: 1.5rem;
+    }
+
+    .modal-image-container {
+        font-size: 4rem;
+        max-height: 250px;
+    }
+
+    .product-modal-details {
+        padding: 2rem 1.5rem;
+        max-height: none;
+    }
+
+    .product-modal-title {
+        font-size: 1.5rem;
+    }
+
+    .product-modal-price {
+        font-size: 1.75rem;
+    }
+
+    .modal-close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.25rem;
+        background: rgba(255, 255, 255, 0.95);
+    }
+}
+
+@media (max-width: 480px) {
+    .product-modal-image {
+        min-height: 250px;
+        max-height: 250px;
+        padding: 1rem;
+    }
+
+    .modal-image-container {
+        font-size: 3rem;
+    }
+
+    .product-modal-details {
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+    }
+
+    .product-modal-title {
+        font-size: 1.3rem;
+    }
+
+    .product-modal-price {
+        font-size: 1.5rem;
+    }
+
+    .modal-add-cart-btn {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+</style>
+
+    <!-- Firebase SDK - Version 8 (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+    
+    <!-- Firebase Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDiU0cygrN9zB3LiWaud-zeX4elFOKF408",
+            authDomain: "dreamdoughph-88e46.firebaseapp.com",
+            databaseURL: "https://dreamdoughph-88e46-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "dreamdoughph-88e46",
+            storageBucket: "dreamdoughph-88e46.firebasestorage.app",
+            messagingSenderId: "114077781038",
+            appId: "1:114077781038:web:bc9d5bce890bbcb022e3bf",
+            measurementId: "G-DSQJGHRNXZ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Get references to services
+        const database = firebase.database();
+
+        console.log("✅ Firebase initialized successfully!");
+    </script>
+    
+    <script src="js/script.js?v=2.9"></script>
+</body>
+</html>

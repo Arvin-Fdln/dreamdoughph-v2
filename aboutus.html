@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>About Us - DreamDoughPH</title>
+    <link rel="icon" href="dd.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Firebase SDK - Version 8 (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-analytics.js"></script>
+
+    <style>
+        /* --- THEME COLORS (FROM INDEX.HTML) --- */
+        :root {
+            --dark-brown: #4b342a;
+    		--brown: #3E2723;
+    		--light-brown: #8D6E63;
+    		--cream: #F5E6D3;
+    		--gold: #D4A574;
+            --dark-gold: #d4a017;
+            --soft-cream: #FFF8E7;
+            --danger: #D32F2F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER STYLES (FROM INDEX.HTML) --- */
+        header {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            font-family: 'Georgia', serif;
+            color: var(--cream);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--gold);
+        }
+
+        /* Active link styling for About page */
+        .nav-links li a[href="about.html"] {
+            color: var(--gold);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--cream);
+            transition: 0.3s;
+        }
+
+        /* --- ABOUT SPECIFIC STYLES (Card Layout) --- */
+        .content-wrapper {
+            flex: 1;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        .page-title-banner {
+            background: linear-gradient(to right, #dfbd69, #eebc46, #dfbd69);
+            padding: 15px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .page-title-banner h1 {
+            font-family: 'Georgia', serif;
+            color: var(--brown);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        
+        /* The main container for the card */
+        .about-card-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative; 
+            margin-top: 150px; 
+            margin-bottom: 50px;
+        }
+        
+        /* The main brown card */
+        .about-card {
+            background-color: var(--brown);
+            width: 100%;
+            max-width: 700px; 
+            border-radius: 12px;
+            padding: 120px 40px 40px; 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            color: var(--cream);
+            text-align: center;
+        }
+
+        /* Logo Positioning (Overlap effect) */
+        .about-logo-wrapper {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        .about-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid var(--cream);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        /* Content inside the card */
+        .card-content h2 {
+            font-family: 'Georgia', serif;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-transform: uppercase;
+        }
+        
+        .card-content h3 {
+            font-family: 'Georgia', serif;
+            color: var(--light-brown);
+            margin-top: 30px;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .card-content p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #f0e8df;
+        }
+
+        /* --- FOOTER STYLES (FROM INDEX.HTML) --- */
+        footer {
+            background-color: var(--brown);
+            color: var(--cream);
+            padding: 3rem 2rem 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Georgia', serif;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--brown);
+                flex-direction: column;
+                padding: 20px;
+                display: none;
+                text-align: center;
+                box-shadow: 0 4px 5px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .about-logo {
+                width: 150px;
+                height: 150px;
+                border-width: 6px;
+            }
+            
+            .about-logo-wrapper {
+                top: -75px;
+            }
+            
+            .about-card {
+                padding: 100px 20px 30px; 
+            }
+            
+            .card-content h2 {
+                font-size: 1.6rem;
+            }
+            
+            .card-content h3 {
+                font-size: 1.3rem;
+            }
+            
+            .about-card-container {
+                margin-top: 100px; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (From index.html) -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>DreamDoughPH</h1>
+                </a>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#cakes">Cakes</a></li>
+                <li><a href="index.html#cookies">Cookies</a></li>
+                <li><a href="index.html#cupcakes">Cupcakes</a></li>
+                <li><a href="index.html#delicacy">Custom Order</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content: About Us Card -->
+    <main class="content-wrapper">
+        
+        <!-- Banner Title: Get To Know Us -->
+        <div class="page-title-banner">
+            <h1><i class="fa-solid fa-cookie-bite"></i> Get To Know Us</h1>
+        </div>
+
+        <!-- Card Container (Positioned low enough to clear the banner) -->
+        <div class="about-card-container">
+            
+            <!-- Logo Placement (Overlapping) -->
+            <div class="about-logo-wrapper">
+                <img 
+                    src="dd.png" 
+                    alt="DreamDoughPH Bakery Logo" 
+                    class="about-logo"
+                    onerror="this.onerror=null; this.src='https://placehold.co/200x200/8d6e63/f3eadd?text=Logo';"
+                >
+            </div>
+
+            <!-- Description Card (Content starts lower to clear the logo) -->
+            <div class="about-card">
+                <div class="card-content">
+                    <h2>Our Sweet Story</h2>
+                    
+                    <h3>The DreamDough Philosophy</h3>
+                    <p><strong>DreamDoughPH</strong> was founded on a simple, yet profound belief: every moment, big or small, deserves a beautifully crafted treat. What started as a small, passionate hobby in a home kitchen in Antipolo City quickly blossomed into a mission to bring high-quality, customized baked goods to every Filipino table.</p>
+                    <p>We specialize in using the finest local and imported ingredients—real butter, premium chocolate, and fresh dairy—ensuring that every bite is rich, moist, and unforgettable. Our commitment is to quality, artistry, and, most importantly, the delight on your face when you see your dream dessert brought to life.</p>
+                    
+                    <h3>From Our Kitchen to Your Table</h3>
+                    <p>Our hands-on approach means we treat every order as a piece of edible art. We take pride in our custom cakes, where imagination is the only limit, but our commitment to excellence extends to every cookie, cupcake, and pastry we offer. We believe that genuine flavor doesn't require shortcuts, and that dedication shows in the depth and complexity of our recipes.</p>
+                    
+                    <h3>Community & Vision</h3>
+                    <p>Beyond baking, DreamDoughPH is committed to growing within our local community. We source ingredients responsibly and aim to create treats that feel homemade and deeply personal. We envision a future where DreamDoughPH is synonymous with celebration, joy, and the perfect, buttery bite.</p>
+
+                    <p style="margin-top: 30px;">Thank you for letting DreamDoughPH be a part of your celebrations. We look forward to baking many more happy memories with you!</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (From index.html) -->
+    <footer id="about">
+        <div class="footer-content">
+            <!-- Contact Us -->
+            <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p id="footerPhone">📞 Loading...</p>
+            <p id="footerEmail">📧 Loading...</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <!-- Social links will be loaded from Firebase -->
+            </div>
+        </div>
+
+        <!-- Store Hours & Location -->
+        <div class="footer-section">
+            <h3>Store Hours & Location</h3>
+            <p id="footerAddress">📍 Loading...</p>
+            <!-- Store hours will be loaded from Firebase here -->
+        </div>
+
+            <!-- Info -->
+            <div class="footer-section">
+                <h3>Info</h3>
+                <a href="aboutus.html">About Us</a>
+                <a href="faq.html">FAQs</a>
+                <a href="tos.html">Terms and Conditions</a>
+                <a href="refundpolicy.html">Refund Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DreamDoughPH. All Rights Reserved. | Baked with ❤️ in Antipolo</p>
+        </div>
+    </footer>
+
+    <!-- Firebase Configuration -->
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDiU0cygrN9zB3LiWaud-zeX4elFOKF408",
+            authDomain: "dreamdoughph-88e46.firebaseapp.com",
+            databaseURL: "https://dreamdoughph-88e46-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "dreamdoughph-88e46",
+            storageBucket: "dreamdoughph-88e46.firebasestorage.app",
+            messagingSenderId: "114077781038",
+            appId: "1:114077781038:web:bc9d5bce890bbcb022e3bf",
+            measurementId: "G-DSQJGHRNXZ"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        console.log("✅ Firebase initialized successfully!");
+    </script>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Load footer data from Firebase (similar to index.html)
+        function loadFooterData() {
+            const footerRef = database.ref('storeInfo');
+            footerRef.once('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    // Update contact info
+                    if (data.phone) document.getElementById('footerPhone').textContent = `📞 ${data.phone}`;
+                    if (data.email) document.getElementById('footerEmail').textContent = `📧 ${data.email}`;
+                    if (data.address) document.getElementById('footerAddress').textContent = `📍 ${data.address}`;
+                    
+                    // Update social links
+                    const socialLinks = document.querySelector('.social-links');
+                    if (data.socialMedia) {
+                        socialLinks.innerHTML = '';
+                        if (data.socialMedia.facebook) {
+                            socialLinks.innerHTML += `<a href="${data.socialMedia.facebook}" target="_blank">📘 Facebook</a><br>`;
+                        }
+                        if (data.socialMedia.instagram) {
+                            socialLinks.innerHTML += `<a href="${data.socialMedia.instagram}" target="_blank">📷 Instagram</a>`;
+                        }
+                    }
+                }
+            }).catch((error) => {
+                console.error('Error loading footer data:', error);
+            });
+        }
+
+        // Load footer data when page loads
+        document.addEventListener('DOMContentLoaded', loadFooterData);
+    </script>
+    <!-- Firebase SDK - Version 8 (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <!-- Footer Loader Script -->
+    <script src="js/footer-loader.js?v=2.2"></script>
+</body>
+</html>

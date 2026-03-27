@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Order - DreamDoughPH</title>
+    <link rel="icon" href="dd.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --brown: #5D4037;
+            --light-brown: #8D6E63;
+            --gold: #D4A574;
+            --cream: #FFF8E1;
+            --soft-cream: #FFF9E6;
+            --danger: #D32F2F;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, var(--soft-cream) 0%, #FFE4CC 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(93, 64, 55, 0.15);
+            padding: 3rem 2.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-brown);
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--brown);
+        }
+
+        h1 {
+            color: var(--brown);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--light-brown);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            color: var(--brown);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .label-hint {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--light-brown);
+            margin-left: 0.5rem;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.9rem;
+            border: 2px solid var(--light-brown);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Georgia', serif;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .small-text {
+            display: block;
+            margin-top: 0.4rem;
+            color: var(--light-brown);
+            font-size: 0.85rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Image Upload Styles */
+        .image-upload-container {
+            border: 3px dashed var(--light-brown);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            background: var(--soft-cream);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .image-upload-container:hover {
+            border-color: var(--gold);
+            background: var(--cream);
+        }
+
+        .image-upload-container.drag-over {
+            border-color: var(--gold);
+            background: var(--cream);
+            transform: scale(1.02);
+        }
+
+        #imageInput {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .upload-text {
+            color: var(--brown);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-hint {
+            color: var(--light-brown);
+            font-size: 0.85rem;
+        }
+
+        .image-preview {
+            display: none;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .remove-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--danger);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .remove-image:hover {
+            background: #B71C1C;
+            transform: scale(1.1);
+        }
+
+        .info-box {
+            background: #E3F2FD;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #2196F3;
+        }
+
+        .info-box p {
+            color: var(--brown);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .warning-box {
+            background: #FFF3CD;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #FFC107;
+        }
+
+        .warning-box p {
+            color: var(--brown);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--brown);
+            color: var(--cream);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: var(--gold);
+            color: var(--brown);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: var(--light-brown);
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-content h2 {
+            color: var(--brown);
+            margin-bottom: 1rem;
+        }
+
+        .modal-content p {
+            color: var(--light-brown);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .modal-btn {
+            padding: 1rem 3rem;
+            background: var(--brown);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: var(--gold);
+            color: var(--brown);
+        }
+
+        /* Loading Progress */
+        .upload-progress {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        /* Sample Custom Orders Section */
+        .samples-section {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 2px solid var(--light-brown);
+        }
+
+        .samples-title {
+            color: var(--brown);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+        }
+
+        .samples-subtitle {
+            text-align: center;
+            color: var(--light-brown);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sample-item {
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .sample-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .sample-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.15);
+            transition: box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .sample-item:hover img {
+            box-shadow: 0 8px 20px rgba(93, 64, 55, 0.25);
+        }
+
+        .sample-label {
+            margin-top: 0.75rem;
+            color: var(--brown);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Image Popup Modal */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .image-modal.active {
+            display: flex;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            animation: zoomIn 0.3s;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: white;
+            color: var(--brown);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .image-modal-close:hover {
+            background: var(--gold);
+            transform: rotate(90deg);
+        }
+
+        .image-modal-label {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: var(--brown);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .samples-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .sample-item img {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .samples-title {
+                font-size: 1.5rem;
+            }
+
+            .samples-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sample-item img {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        
+        <h1>🎂 Custom Order</h1>
+        <p class="subtitle">Create your dream cake, cupcake, or cookie design</p>
+
+        <div class="info-box">
+            <p>💡 <strong>Tip:</strong> Upload a reference photo of your desired design to help us bring your vision to life! The clearer the reference, the better we can recreate it.</p>
+        </div>
+
+        <form id="customOrderForm">
+            <!-- Customer Information -->
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="customerName" required placeholder="Enter your full name">
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Phone Number *
+                    <span class="label-hint">(Format: 09XXXXXXXXX)</span>
+                </label>
+                <input type="tel" id="customerPhone" required placeholder="09XXXXXXXXX" maxlength="11" pattern="09[0-9]{9}">
+                <small class="small-text">📱 Enter your 11-digit mobile number starting with 09</small>
+            </div>
+
+            <div class="form-group">
+                <label>Email (Optional)</label>
+                <input type="email" id="customerEmail" placeholder="your@email.com">
+            </div>
+
+            <!-- Order Details -->
+            <div class="form-group">
+                <label>Product Type *</label>
+                <select id="productType" required>
+                    <option value="">-- Select Product Type --</option>
+                    <option value="Cake">Cake</option>
+                    <option value="Cupcakes">Cupcakes</option>
+                    <option value="Cookies">Cookies</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Quantity *</label>
+                    <input type="number" id="quantity" required min="1" value="1" placeholder="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Size / Serving *</label>
+                    <input type="text" id="size" required placeholder="e.g., 8 inches, 12 pcs">
+                </div>
+            </div>
+
+            <!-- Reference Image Upload -->
+            <div class="form-group">
+                <label>Reference Photo (Optional but Recommended)</label>
+                <div class="image-upload-container" id="uploadContainer">
+                    <input type="file" id="imageInput" accept="image/*">
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">Click or drag image here</div>
+                    <div class="upload-hint">Supported: JPG, PNG, GIF (Max 5MB)</div>
+                </div>
+                <div class="upload-progress" id="uploadProgress">
+                    <div style="color: var(--brown); font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        <span id="progressText">Uploading...</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="image-preview" id="imagePreview">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button type="button" class="remove-image" onclick="removeImage()">×</button>
+                </div>
+            </div>
+
+            <!-- Additional Details -->
+            <div class="form-group">
+                <label>Flavor Preferences</label>
+                <input type="text" id="flavor" placeholder="e.g., Chocolate, Vanilla, Red Velvet">
+            </div>
+
+            <div class="form-group">
+                <label>Design Description *</label>
+                <textarea id="designDescription" required placeholder="Describe your desired design, colors, theme, text on cake, etc."></textarea>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Pickup Date *</label>
+                    <input type="date" id="pickupDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Pickup Time *</label>
+                    <input type="time" id="pickupTime" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Delivery Address (Optional)</label>
+                <textarea id="deliveryAddress" rows="2" placeholder="Complete address if delivery is needed"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Notes / Special Requests</label>
+                <textarea id="additionalNotes" rows="3" placeholder="Any other details we should know..."></textarea>
+            </div>
+
+            <div class="warning-box">
+                <p>⚠️ <strong>Note:</strong> This is a custom order inquiry. We will contact you within 24 hours to discuss pricing, feasibility, and confirm your order details before processing.</p>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Submit Custom Order</button>
+        </form>
+
+        <!-- Sample Custom Orders Section -->
+        <div class="samples-section">
+            <h2 class="samples-title">✨ Sample Custom Orders from Our Customers</h2>
+            <p class="samples-subtitle">Get inspired by these beautiful custom creations we've made for our happy customers!</p>
+            
+            <div class="samples-grid">
+                <div class="sample-item">
+                    <img src="scos/CAKE.png" 
+                         data-fullsize="" 
+                         alt="Custom floral cake" 
+                         onclick="openImageModal(this, 'Custom Floral Cake')">
+                    <p class="sample-label">Custom Floral Cake</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/CAKE (2).png" 
+                         data-fullsize="" 
+                         alt="Gender reveal cake" 
+                         onclick="openImageModal(this, 'Gender Reveal Cake')">
+                    <p class="sample-label">Gender Reveal Cake</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/CUPCAKE6.png" 
+                         data-fullsize="" 
+                         alt="Custom character cupcakes" 
+                         onclick="openImageModal(this, 'Character Cupcakes')">
+                    <p class="sample-label">Character Cupcakes</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/CUPCAKE5.png" 
+                         data-fullsize="" 
+                         alt="Winter themed cupcakes" 
+                         onclick="openImageModal(this, 'Winter Cupcakes')">
+                    <p class="sample-label">Winter Cupcakes</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/CUPCAKE4.png" 
+                         data-fullsize="" 
+                         alt="Custom decorated cupcakes" 
+                         onclick="openImageModal(this, 'Decorated Cupcakes')">
+                    <p class="sample-label">Decorated Cupcakes</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/CUPCAKE3.png" 
+                         data-fullsize="" 
+                         alt="Elegant rose cupcakes" 
+                         onclick="openImageModal(this, 'Rose Cupcakes')">
+                    <p class="sample-label">Rose Cupcakes</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/COOKIE20.png" 
+                         data-fullsize="" 
+                         alt="Mint chocolate cookies" 
+                         onclick="openImageModal(this, 'Mint Chocolate Cookies')">
+                    <p class="sample-label">Mint Chocolate Cookies</p>
+                </div>
+                <div class="sample-item">
+                    <img src="scos/COOKIE2.png" 
+                         data-fullsize="" 
+                         alt="Cookie Monster cookies" 
+                         onclick="openImageModal(this, 'Cookie Monster')">
+                    <p class="sample-label">Cookie Monster</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Popup Modal -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <div class="image-modal-content">
+            <button class="image-modal-close" onclick="closeImageModal()">×</button>
+            <img id="modalImage" src="" alt="Full size image">
+            <div class="image-modal-label" id="modalLabel"></div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h2>Order Submitted!</h2>
+            <p>Thank you! We've received your custom order request. Our team will contact you within 24 hours to discuss details and pricing.</p>
+            <button class="modal-btn" onclick="window.location.href='index.html'">Back to Home</button>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDiU0cygrN9zB3LiWaud-zeX4elFOKF408",
+            authDomain: "dreamdoughph-88e46.firebaseapp.com",
+            databaseURL: "https://dreamdoughph-88e46-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "dreamdoughph-88e46",
+            storageBucket: "dreamdoughph-88e46.firebasestorage.app",
+            messagingSenderId: "114077781038",
+            appId: "1:114077781038:web:bc9d5bce890bbcb022e3bf"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        
+        // Cloudinary Configuration (same as admin panel)
+        const CLOUDINARY_CLOUD_NAME = 'dgi195c7t';
+        const CLOUDINARY_UPLOAD_PRESET = 'dreamdough_products';
+
+        // Set minimum date to tomorrow
+        const dateInput = document.getElementById('pickupDate');
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+
+        // Image Upload Handling
+        const uploadContainer = document.getElementById('uploadContainer');
+        const imageInput = document.getElementById('imageInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        let selectedFile = null;
+
+        uploadContainer.addEventListener('click', () => imageInput.click());
+
+        imageInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleImageFile(file);
+            }
+        });
+
+        // Drag and drop
+        uploadContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadContainer.classList.add('drag-over');
+        });
+
+        uploadContainer.addEventListener('dragleave', () => {
+            uploadContainer.classList.remove('drag-over');
+        });
+
+        uploadContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadContainer.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                imageInput.files = e.dataTransfer.files;
+                handleImageFile(file);
+            }
+        });
+
+        function handleImageFile(file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                imageInput.value = '';
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                imageInput.value = '';
+                return;
+            }
+
+            selectedFile = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+                uploadContainer.style.display = 'none';
+                imagePreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage() {
+            selectedFile = null;
+            imageInput.value = '';
+            uploadContainer.style.display = 'block';
+            imagePreview.style.display = 'none';
+            uploadProgress.style.display = 'none';
+            previewImg.src = '';
+            progressFill.style.width = '0%';
+        }
+
+        // Form Submission
+        document.getElementById('customOrderForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+
+            try {
+                let imageUrl = '';
+                
+                // Upload image to Cloudinary if selected
+                if (selectedFile) {
+                    submitBtn.textContent = 'Uploading image...';
+                    uploadProgress.style.display = 'block';
+                    progressText.textContent = 'Uploading image to Cloudinary...';
+                    
+                    // Create form data for Cloudinary
+                    const formData = new FormData();
+                    formData.append('file', selectedFile);
+                    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+                    formData.append('folder', 'custom-orders');
+                    
+                    // Upload to Cloudinary
+                    const cloudinaryResponse = await fetch(
+                        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+                        {
+                            method: 'POST',
+                            body: formData
+                        }
+                    );
+                    
+                    const cloudinaryData = await cloudinaryResponse.json();
+                    
+                    if (cloudinaryData.secure_url) {
+                        imageUrl = cloudinaryData.secure_url;
+                        progressFill.style.width = '100%';
+                        progressText.textContent = 'Upload complete!';
+                    } else {
+                        throw new Error('Image upload failed');
+                    }
+                }
+
+                // Prepare order data
+                submitBtn.textContent = 'Submitting order...';
+                
+                // Format items array to match regular orders structure
+                const items = [{
+                    name: `Custom ${document.getElementById('productType').value}`,
+                    category: document.getElementById('productType').value.toLowerCase(),
+                    quantity: parseInt(document.getElementById('quantity').value),
+                    price: 0, // Price will be discussed with customer
+                    size: document.getElementById('size').value.trim(),
+                    flavor: document.getElementById('flavor').value.trim() || 'To be determined',
+                    designDescription: document.getElementById('designDescription').value.trim()
+                }];
+                
+                const orderData = {
+                    customerName: document.getElementById('customerName').value.trim(),
+                    customerPhone: document.getElementById('customerPhone').value.trim(),
+                    customerEmail: document.getElementById('customerEmail').value.trim() || '',
+                    customerAddress: document.getElementById('deliveryAddress').value.trim() || '',
+                    pickupDate: document.getElementById('pickupDate').value,
+                    pickupTime: document.getElementById('pickupTime').value,
+                    items: items,
+                    notes: document.getElementById('additionalNotes').value.trim() || '',
+                    subtotal: 0,
+                    total: 0,
+                    status: 'pending',
+                    orderType: 'custom',
+                    referenceImageUrl: imageUrl || '',
+                    createdAt: new Date().toISOString(),
+                    date: new Date().toLocaleString('en-PH', {
+                        timeZone: 'Asia/Manila',
+                        year: 'numeric',
+                        month: 'short',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    })
+                };
+
+                // Save to Firebase under 'orders' (same as regular orders)
+                await database.ref('orders').push(orderData);
+
+                // Show success modal
+                document.getElementById('successModal').style.display = 'flex';
+
+                // Reset form
+                this.reset();
+                removeImage();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Custom Order';
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting order: ' + error.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Custom Order';
+                uploadProgress.style.display = 'none';
+            }
+        });
+        
+        // Image Modal Functions
+        function openImageModal(img, label) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const modalLabel = document.getElementById('modalLabel');
+            
+            modal.classList.add('active');
+            // Use data-fullsize attribute for original quality, fallback to src
+            modalImg.src = img.dataset.fullsize || img.src;
+            modalLabel.textContent = label;
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('active');
+            
+            // Restore body scroll
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
+    </script>
+</body>
+</html>

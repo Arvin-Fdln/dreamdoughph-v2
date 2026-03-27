@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Refund Policy - DreamDoughPH</title>
+    <link rel="icon" href="dd.png">
+    
+    <link rel="stylesheet" href="css/styles.css?v=2.1">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- Refund Policy Specific Styles --- */
+        /* (These styles are local to this page to format the text content nicely) */
+        
+        body {
+            background-color: #f9f4ef; /* Light cream background to match theme */
+            color: #4b342a; /* Brown text */
+        }
+
+        .policy-container {
+            max-width: 900px;
+            margin: 40px auto 80px auto;
+            padding: 0 20px;
+            line-height: 1.8;
+            font-family: 'Georgia', sans-serif;
+        }
+
+        /* Title Banner Style */
+        .page-title-banner {
+            width: fit-content;
+            margin: 40px auto 50px auto;
+            background: linear-gradient(to right, #dfbd69, #eebc46, #dfbd69);
+            padding: 15px 60px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        .page-title-banner h1 {
+            font-family: 'Georgia', serif;
+            font-weight: 700;
+            color: #3e2b23;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 24px;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        /* Policy Sections */
+        .policy-section {
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(238, 188, 70, 0.3); /* Subtle gold border */
+        }
+
+        .policy-section h2 {
+            font-family: 'Georgia', serif;
+            color: #4b342a;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eebc46;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .policy-section ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .policy-section li {
+            margin-bottom: 10px;
+        }
+
+        .contact-email {
+            font-weight: bold;
+            color: #d4a017;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">
+                <h1><a href="index.html" style="text-decoration: none; color: inherit;">DreamDoughPH</a></h1>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#cakes">Cakes</a></li>
+                <li><a href="index.html#cookies">Cookies</a></li>
+                <li><a href="index.html#cupcakes">Cupcakes</a></li>
+                <li><a href="index.html#delicacy">Custom Order</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                </div>
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-title-banner">
+            <h1><i class="fa-solid fa-star"></i> Refund Policy</h1>
+        </div>
+
+        <div class="policy-container">
+            
+            <div class="policy-section">
+                <h2>1. Perishable Goods Policy</h2>
+                <p>Because our cakes, cookies, and cupcakes are perishable food items made fresh to order, we generally <strong>do not accept returns</strong>. Unlike clothing or electronics, we cannot resell food items once they have left our shop.</p>
+                <ul>
+                    <li>We do not offer refunds for "change of mind" or taste preference.</li>
+                    <li>Please review your invoice carefully before payment to ensure flavor, size, and design details are correct.</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>2. Damages & Issues</h2>
+                <p>Please inspect your order immediately upon reception (pickup or delivery).</p>
+                <ul>
+                    <li><strong>Delivery Damages:</strong> If you used a third-party courier booked by us, and the item arrives smashed or ruined, please take a photo immediately and contact us within <strong>1 hour</strong> of receipt.</li>
+                    <li><strong>Client Handling:</strong> We are not responsible for damages caused by improper handling or storage after the item has been handed over to you or your courier.</li>
+                    <li><strong>Missing Items:</strong> If an item is missing from your box, let us know immediately so we can arrange a refund for the missing portion or send a replacement.</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>3. Cancellation Policy</h2>
+                <p>Since we bake our goods fresh, cancellations affect our production schedule and ingredients.</p>
+                <ul>
+                    <li><strong>7 Days Prior:</strong> Full refund available.</li>
+                    <li><strong>3-6 Days Prior:</strong> 50% refund (to cover reserved ingredients/slots).</li>
+                    <li><strong>48 Hours or Less:</strong> Non-refundable. The batter is likely already prepped!</li>
+                </ul>
+            </div>
+
+            <div class="policy-section">
+                <h2>4. Custom Design Accuracy</h2>
+                <p>For custom cakes and cupcakes, we do our best to match your provided reference photos. However, please note that baking is an art form and icing colors may vary slightly. Slight variations in design interpretation are not grounds for a refund.</p>
+            </div>
+
+            <div class="policy-section">
+                <h2>Contact Us</h2>
+                <p>If you have an issue with your order, please reach out to us with your Order Number and photos of the product.</p>
+                <p style="margin-top: 10px;">Email: <span class="contact-email">hannahjaperwilson@gmail.com</span><br>
+                Phone: <span class="contact-email">09 206 171 784</span></p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer id="about">
+        <div class="footer-content">
+           <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p id="footerPhone">📞 Loading...</p>
+            <p id="footerEmail">📧 Loading...</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <!-- Social links will be loaded from Firebase -->
+            </div>
+        </div>
+
+        <!-- Store Hours & Location -->
+        <div class="footer-section">
+            <h3>Store Hours & Location</h3>
+            <p id="footerAddress">📍 Loading...</p>
+            <!-- Store hours will be loaded from Firebase here -->
+        </div>
+
+            <div class="footer-section">
+                <h3>Info</h3>
+                <a href="aboutus.html">About Us</a>
+                <a href="faq.html">FAQs</a>
+                <a href="tos.html">Terms and Conditions</a>
+                <a href="refundpolicy.html">Refund Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DreamDoughPH. All Rights Reserved. | Baked with ❤️ in Antipolo</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK - Version 8 (Compat) - MUST BE BEFORE footer-loader.js -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
+    <!-- Footer Loader Script - MUST BE AFTER Firebase SDK -->
+    <script src="js/footer-loader.js"></script>
+
+    <!-- Accordion Script -->
+    <script>
+        // Accordion (Slide Down) Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.closest('.faq-item');
+                    
+                    // Toggle the 'active' class to start the CSS transition
+                    item.classList.toggle('active');
+                    
+                    // Optional: Close other open items
+                    faqQuestions.forEach(otherQuestion => {
+                        const otherItem = otherQuestion.closest('.faq-item');
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

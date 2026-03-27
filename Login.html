@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Dough - Admin Login</title>
+	<link rel="icon" href="dd.png">
+    <style>
+        :root {
+            --cream: #F5E6D3;
+            --brown: #2C3E50;
+            --gold: #3498DB;
+            --light-brown: #7F8C8D;
+            --soft-cream: #F8F9FA;
+            --danger: #E74C3C;
+            --success: #27AE60;
+            --border: 1px solid #E0E0E0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2530 0%, var(--brown) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            color: #2C3E50;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border: var(--border);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            color: var(--brown);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-align: left;
+        }
+
+        .logo-text p {
+            color: var(--light-brown);
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+
+        .welcome-message {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--light-brown);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--brown);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--light-brown);
+            font-size: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.85rem 1rem 0.85rem 3rem;
+            border: var(--border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            background: var(--soft-cream);
+            color: var(--brown);
+            transition: all 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--light-brown);
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .password-toggle:hover {
+            background: #E9ECEF;
+            color: var(--brown);
+        }
+
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-brown);
+            font-size: 0.9rem;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: var(--gold);
+            cursor: pointer;
+        }
+
+        .remember-me label {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .forgot-password {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .forgot-password:hover {
+            color: #2980B9;
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+        }
+
+        .login-btn:hover:not(:disabled) {
+            background: #2980B9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.3);
+        }
+
+        .login-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: none;
+            border-left: 4px solid;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .error-message {
+            background: #FDEDED;
+            color: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .success-message {
+            background: #EDF7ED;
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .info-message {
+            background: #E8F4FD;
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+            border: var(--border);
+            animation: modalSlideUp 0.3s ease-out;
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: var(--border);
+        }
+
+        .modal-header h2 {
+            color: var(--brown);
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--light-brown);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .close-modal:hover {
+            background: #F8F9FA;
+            color: var(--danger);
+        }
+
+        .modal-description {
+            color: var(--light-brown);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .reset-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .reset-btn:hover:not(:disabled) {
+            background: #219955;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+        }
+
+        .reset-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .back-to-login {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: var(--border);
+        }
+
+        .back-to-login a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .back-to-login a:hover {
+            color: #2980B9;
+            text-decoration: underline;
+        }
+
+        /* Admin Tip */
+        .admin-tip {
+            margin-top: 2rem;
+            padding: 1.25rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .admin-tip h3 {
+            font-size: 0.9rem;
+            color: var(--brown);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-tip p {
+            font-size: 0.85rem;
+            color: var(--light-brown);
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .logo-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .logo-text h1,
+            .logo-text p {
+                text-align: center;
+            }
+
+            .form-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .login-wrapper {
+                padding: 1rem 0;
+            }
+        }
+
+        /* Keyboard focus styles */
+        button:focus,
+        input:focus {
+            outline: 2px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+        }
+
+        /* Shake animation for error */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <div class="login-header">
+                <div class="logo-container">
+                    <div class="logo-text">
+                        <h1>Dream Dough PH</h1>
+                        <p>Admin Panel</p>
+                    </div>
+                </div>
+                <p class="welcome-message">Sign in to access your bakery management dashboard</p>
+            </div>
+
+            <div class="message error-message" id="errorMessage"></div>
+            <div class="message success-message" id="successMessage"></div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-icon">📧</span>
+                        <input type="email" id="email" class="form-input" placeholder="admin@dreamdough.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Password</label>
+                    <div class="input-group">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword()" title="Show/Hide Password">
+                            👁️
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <div class="remember-me">
+                        <input type="checkbox" id="rememberMe">
+                        <label for="rememberMe">Remember me</label>
+                    </div>
+                    <a class="forgot-password" onclick="openForgotPasswordModal()">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="loading-spinner" style="display: none;"></span>
+                    Sign In
+                </button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Reset Password</h2>
+                <button type="button" class="close-modal" onclick="closeForgotPasswordModal()">✕</button>
+            </div>
+
+            <div class="modal-description">
+                Enter your email address below. We'll send you a link to reset your password.
+            </div>
+
+            <form id="resetForm" onsubmit="handlePasswordReset(event)">
+                <div class="form-group">
+                    <label class="form-label" for="resetEmail">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-icon">📧</span>
+                        <input type="email" id="resetEmail" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="reset-btn" id="resetBtn">
+                    <span class="loading-spinner" style="display: none;"></span>
+                    Send Reset Link
+                </button>
+            </form>
+
+            <div class="back-to-login">
+                <a onclick="closeForgotPasswordModal()">← Back to Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database-compat.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyDiU0cygrN9zB3LiWaud-zeX4elFOKF408",
+            authDomain: "dreamdoughph-88e46.firebaseapp.com",
+            databaseURL: "https://dreamdoughph-88e46-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "dreamdoughph-88e46",
+            storageBucket: "dreamdoughph-88e46.firebasestorage.app",
+            messagingSenderId: "114077781038",
+            appId: "1:114077781038:web:bc9d5bce890bbcb022e3bf",
+            measurementId: "G-DSQJGHRNXZ"
+        };
+
+        // Initialize Firebase
+        let auth;
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(firebaseConfig);
+            }
+            auth = firebase.auth();
+            console.log("✅ Firebase initialized successfully!");
+        } catch (error) {
+            console.error("❌ Firebase initialization error:", error);
+        }
+
+        // Toggle password visibility
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleBtn = event.target.closest('.password-toggle');
+            const isPassword = passwordInput.type === 'password';
+            
+            passwordInput.type = isPassword ? 'text' : 'password';
+            toggleBtn.textContent = isPassword ? '🙈' : '👁️';
+            
+            // Focus back on input
+            passwordInput.focus();
+        }
+
+        // Show message function
+        function showMessage(type, message) {
+            const messageDiv = document.getElementById(type + 'Message');
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Reset button to normal state
+        function resetButtonState(buttonId, originalText) {
+            const button = document.getElementById(buttonId);
+            const spinner = button.querySelector('.loading-spinner');
+            
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+            
+            button.disabled = false;
+            button.innerHTML = originalText;
+        }
+
+        // Handle login - FIXED VERSION
+        async function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Store original button text
+            const originalText = loginBtn.innerHTML;
+            
+            // Show loading state
+            loginBtn.innerHTML = '<span class="loading-spinner"></span> Signing In...';
+            loginBtn.disabled = true;
+
+            // Clear previous messages
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+
+            try {
+                console.log('🔐 Attempting login...');
+                
+                if (!auth) {
+                    throw new Error('Firebase authentication not initialized');
+                }
+
+                const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                
+                console.log('✅ Login successful!');
+                
+                // Save email if remember me is checked
+                if (document.getElementById('rememberMe').checked) {
+                    localStorage.setItem('dreamDoughRememberedEmail', email);
+                } else {
+                    localStorage.removeItem('dreamDoughRememberedEmail');
+                }
+
+                showMessage('success', '✅ Login successful! Redirecting...');
+                
+                // Redirect to admin panel after short delay
+                setTimeout(() => {
+                    window.location.href = 'admin.html';
+                }, 1500);
+
+            } catch (error) {
+                console.error('❌ Login error:', error.code, error.message);
+                
+                // Reset button state immediately
+                resetButtonState('loginBtn', originalText);
+                
+                // Add shake effect
+                loginBtn.classList.add('shake');
+                setTimeout(() => {
+                    loginBtn.classList.remove('shake');
+                }, 500);
+
+                // Show appropriate error message
+                let errorMessage = 'Login failed. Please try again.';
+                
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                        errorMessage = '❌ Please enter a valid email address';
+                        break;
+                    case 'auth/user-not-found':
+                        errorMessage = '❌ No account found with this email';
+                        break;
+                    case 'auth/wrong-password':
+                        errorMessage = '❌ Incorrect password. Please try again.';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = '❌ Too many attempts. Please try again in a few minutes.';
+                        break;
+                    case 'auth/user-disabled':
+                        errorMessage = '❌ This account has been disabled';
+                        break;
+                    case 'auth/invalid-credential':
+                        errorMessage = '❌ Invalid email or password';
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage = '❌ Network error. Please check your internet connection.';
+                        break;
+                    default:
+                        errorMessage = `❌ ${error.message}`;
+                }
+                
+                showMessage('error', errorMessage);
+                
+                // Focus on password field for correction
+                document.getElementById('password').focus();
+                document.getElementById('password').select();
+            }
+        }
+
+        // Forgot password modal functions
+        function openForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').classList.add('active');
+            // Pre-fill with email from login form if available
+            const loginEmail = document.getElementById('email').value;
+            if (loginEmail) {
+                document.getElementById('resetEmail').value = loginEmail;
+            }
+            // Focus on the reset email input
+            setTimeout(() => {
+                document.getElementById('resetEmail').focus();
+            }, 100);
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').classList.remove('active');
+            document.getElementById('resetForm').reset();
+        }
+
+        // Handle password reset - FIXED VERSION
+        async function handlePasswordReset(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('resetEmail').value.trim();
+            const resetBtn = document.getElementById('resetBtn');
+            
+            // Store original button text
+            const originalText = resetBtn.innerHTML;
+            
+            // Show loading state
+            resetBtn.innerHTML = '<span class="loading-spinner"></span> Sending...';
+            resetBtn.disabled = true;
+
+            try {
+                console.log('📧 Sending password reset email...');
+                
+                if (!auth) {
+                    throw new Error('Firebase authentication not initialized');
+                }
+
+                await auth.sendPasswordResetEmail(email);
+                
+                console.log('✅ Password reset email sent!');
+                
+                showMessage('success', '✅ Password reset email sent! Check your inbox.');
+
+                // Reset button state
+                resetButtonState('resetBtn', 'Send Reset Link');
+                
+                // Close modal after delay
+                setTimeout(() => {
+                    closeForgotPasswordModal();
+                    showMessage('success', '✅ Check your email for the password reset link.');
+                }, 2000);
+
+            } catch (error) {
+                console.error('❌ Reset error:', error.code, error.message);
+                
+                // Reset button state
+                resetButtonState('resetBtn', originalText);
+                
+                // Show appropriate error message
+                let errorMessage = 'Failed to send reset email.';
+                
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        errorMessage = '❌ No account found with this email';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = '❌ Please enter a valid email address';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = '❌ Too many attempts. Please try again later.';
+                        break;
+                    case 'auth/network-request-failed':
+                        errorMessage = '❌ Network error. Please check your internet connection.';
+                        break;
+                    default:
+                        errorMessage = `❌ ${error.message}`;
+                }
+                
+                showMessage('error', errorMessage);
+            }
+        }
+
+        // Load remembered email on page load
+        window.addEventListener('load', () => {
+            const rememberedEmail = localStorage.getItem('dreamDoughRememberedEmail');
+            if (rememberedEmail) {
+                document.getElementById('email').value = rememberedEmail;
+                document.getElementById('rememberMe').checked = true;
+            }
+
+            // Clear any existing session for security (non-blocking)
+            if (auth) {
+                auth.signOut().then(() => {
+                    console.log('✅ Previous session cleared');
+                }).catch(error => {
+                    console.log('ℹ️ No active session to clear');
+                });
+            }
+
+            // Auto-focus email field
+            setTimeout(() => {
+                const emailInput = document.getElementById('email');
+                if (emailInput && !emailInput.value) {
+                    emailInput.focus();
+                }
+            }, 100);
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('forgotPasswordModal').addEventListener('click', (e) => {
+            if (e.target.id === 'forgotPasswordModal') {
+                closeForgotPasswordModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('forgotPasswordModal').classList.contains('active')) {
+                closeForgotPasswordModal();
+            }
+            
+            // Enter key to submit login form
+            if (e.key === 'Enter' && !e.shiftKey && e.target.id === 'password') {
+                e.preventDefault();
+                if (!document.getElementById('loginBtn').disabled) {
+                    document.getElementById('loginBtn').click();
+                }
+            }
+        });
+
+        // Form validation
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                this.style.borderColor = 'var(--danger)';
+                this.style.boxShadow = '0 0 0 3px rgba(231, 76, 60, 0.1)';
+            } else {
+                this.style.borderColor = '';
+                this.style.boxShadow = '';
+            }
+        });
+
+        // Enable/disable login button based on form validity
+        function checkFormValidity() {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValidEmail = emailRegex.test(email);
+            const isValidPassword = password.length >= 6;
+            
+            loginBtn.disabled = !(isValidEmail && isValidPassword);
+        }
+
+        // Add real-time form validation
+        document.getElementById('email').addEventListener('input', checkFormValidity);
+        document.getElementById('password').addEventListener('input', checkFormValidity);
+
+        // Initial check
+        setTimeout(checkFormValidity, 100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Terms and Conditions - DreamDoughPH</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="icon" href="dd.png">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- THEME COLORS (Matches index.html & refundpolicy.html) --- */
+        :root {
+            --dark-brown: #4b342a;
+            --brown: #3E2723;
+            --light-brown: #8D6E63;
+            --cream: #F5E6D3;
+            --gold: #D4A574;
+            --gold-dark: #d4a017;
+            --white: #ffffff;
+            --text-dark: #333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', sans-serif;
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER STYLES --- */
+        header {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo h1 {
+            font-family: 'Georgia', serif;
+            color: var(--cream);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            color: var(--cream);
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links li a:hover {
+            color: var(--gold);
+        }
+
+        /* Hamburger Menu (Mobile) */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            transition: 0.3s;
+        }
+
+        /* --- CONTENT STYLES --- */
+        .content-wrapper {
+            flex: 1;
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        .page-title-banner {
+            background: linear-gradient(to right, #dfbd69, #eebc46, #dfbd69);
+            padding: 15px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .page-title-banner h1 {
+            font-family: 'Georgia', serif;
+            color: var(--dark-brown);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        .tos-section {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            border-left: 5px solid var(--gold);
+        }
+
+        .tos-section h2 {
+            font-family: 'Georgia', serif;
+            color: var(--dark-brown);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+        }
+
+        .tos-section p {
+            margin-bottom: 15px;
+        }
+
+        .tos-section ul {
+            margin-left: 20px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .tos-section li {
+            margin-bottom: 8px;
+        }
+
+        .tos-section strong {
+            color: var(--dark-brown);
+        }
+
+        /* --- FOOTER STYLES --- */
+        footer {
+            background-color: var(--dark-brown);
+            color: var(--cream);
+            padding: 3rem 2rem 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Georgia', serif;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-brown);
+                flex-direction: column;
+                padding: 20px;
+                display: none;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header (No Cart Button) -->
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none;">
+                    <h1>DreamDoughPH</h1>
+                </a>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#cakes">Cakes</a></li>
+                <li><a href="index.html#cookies">Cookies</a></li>
+                <li><a href="index.html#cupcakes">Cupcakes</a></li>
+                <li><a href="index.html#delicacy">Custom Order</a></li>
+                <li><a href="index.html#about">About</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content: Terms and Conditions -->
+    <main class="content-wrapper">
+        
+        <div class="page-title-banner">
+            <h1><i class="fa-solid fa-scale-balanced"></i> Terms & Conditions</h1>
+        </div>
+
+        <div class="tos-section">
+            <h2>1. Agreement to Terms</h2>
+            <p>By placing an order with <strong>DreamDoughPH</strong> (via website, social media, or phone), you agree to be bound by these Terms and Conditions. Please read them carefully before finalizing your purchase.</p>
+        </div>
+
+        <div class="tos-section">
+            <h2>2. Orders and Payment</h2>
+            <ul>
+                <li><strong>Booking Confirmation:</strong> Orders are only confirmed once full payment or the required deposit has been received. Unpaid slots will be released after 24 hours.</li>
+                <li><strong>Lead Time:</strong> Custom cakes require at least <strong>5-7 days</strong> notice. Cookies and standard cupcakes require at least <strong>2-3 days</strong> notice.</li>
+                <li><strong>Payment Methods:</strong> We accept GCash, Bank Transfer, or Cash (for in-store pickup only).</li>
+            </ul>
+        </div>
+
+        <div class="tos-section">
+            <h2>3. Pickup and Delivery</h2>
+            <p><strong>Transfer of Responsibility:</strong> Once the product leaves our premises, DreamDoughPH is no longer liable for any damage.</p>
+            <ul>
+                <li><strong>Self-Pickup:</strong> Please handle cakes with care. Place them on the floor of the car (flattest surface), not on the seats. Keep air conditioning on high.</li>
+                <li><strong>Third-Party Couriers (Grab/Lalamove):</strong> We recommend using "Car" options for cakes. Motorbikes are strictly discouraged for tiered cakes. We are not liable for damages caused by the rider's handling or traffic conditions.</li>
+            </ul>
+        </div>
+
+        <div class="tos-section">
+            <h2>4. Storage & Handling</h2>
+            <p>Our products are made with real butter and dairy. They are sensitive to heat, especially in the Philippines climate.</p>
+            <ul>
+                <li><strong>Cakes/Cupcakes:</strong> Keep refrigerated. Bring to room temperature 30 minutes before serving for the best texture.</li>
+                <li><strong>Cookies:</strong> Store in an airtight container at room temperature. Consume within 5 days for freshness.</li>
+            </ul>
+        </div>
+
+        <div class="tos-section">
+            <h2>5. Design Variations</h2>
+            <p>Baking is an art form. While we aim to replicate your requested design or reference photos as closely as possible, please allow for slight variations in color, piping style, and placement. We reserve the right to make artistic adjustments to ensure structural stability.</p>
+        </div>
+
+        <div class="tos-section">
+            <h2>6. Allergies & Dietary Restrictions</h2>
+            <p>Our kitchen processes flour, eggs, dairy, nuts, and chocolate. While we take hygiene seriously, we cannot guarantee a 100% allergen-free environment due to the possibility of cross-contamination.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="footer-content">
+            <!-- Contact Us -->
+            <div class="footer-section">
+            <h3>Contact Us</h3>
+            <p id="footerPhone">📞 Loading...</p>
+            <p id="footerEmail">📧 Loading...</p>
+            <div class="social-links" style="margin-top: 1rem;">
+                <!-- Social links will be loaded from Firebase -->
+            </div>
+        </div>
+
+        <!-- Store Hours & Location -->
+        <div class="footer-section">
+            <h3>Store Hours & Location</h3>
+            <p id="footerAddress">📍 Loading...</p>
+            <!-- Store hours will be loaded from Firebase here -->
+        </div>
+
+            <!-- Info -->
+            <div class="footer-section">
+                <h3>Info</h3>
+                <a href="index.html">About Us</a>
+                <a href="faq.html">FAQs</a>
+                <a href="tos.html" style="color: var(--gold);">Terms and Conditions</a>
+                <a href="refundpolicy.html">Refund Policy</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 DreamDoughPH. All Rights Reserved. | Baked with ❤️ in Antipolo</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+    <!-- Firebase SDK - Version 8 (Compat) -->  
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <!-- Footer Loader Script -->
+    <script src="js/footer-loader.js"></script> 
+</body>
+</html>
