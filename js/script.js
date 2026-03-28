@@ -1251,13 +1251,41 @@ function openProductDetails(productId, isCustom = false) {
             } else {
                 imageHTML = image;
             }
+            const stock = product.stock !== undefined ? product.stock : 999;
+            const isOutOfStock = stock <= 0;
+
             document.getElementById('productModalImage').innerHTML = imageHTML;
             document.getElementById('productModalName').textContent = product.name;
             document.getElementById('productModalPrice').textContent = `₱${parseFloat(product.price).toFixed(2)}`;
             document.getElementById('productModalCategory').textContent = (product.category || '').toUpperCase();
             document.getElementById('productModalDescription').textContent = product.description || 'No description available.';
             document.getElementById('modalQuantity').textContent = modalQuantity;
-            openModal('productModal');
+
+            // Stock display in modal
+            let stockEl = document.getElementById('modalStockInfo');
+            if (!stockEl) {
+                stockEl = document.createElement('div');
+                stockEl.id = 'modalStockInfo';
+                stockEl.style.cssText = 'margin: 0.5rem 0; font-size: 0.85rem; font-weight: 600;';
+                document.querySelector('.product-modal-quantity').insertAdjacentElement('beforebegin', stockEl);
+            }
+            stockEl.textContent = isOutOfStock ? '❌ Out of Stock' : `✅ ${stock} left in stock`;
+            stockEl.style.color = isOutOfStock ? '#e74c3c' : stock <= 10 ? '#e67e22' : '#27ae60';
+
+            // Disable add to cart button if out of stock
+            const addBtn = document.querySelector('.modal-add-cart-btn');
+            if (addBtn) {
+                addBtn.disabled = isOutOfStock;
+                addBtn.style.opacity = isOutOfStock ? '0.5' : '1';
+                addBtn.style.cursor = isOutOfStock ? 'not-allowed' : 'pointer';
+                addBtn.querySelector('span').textContent = isOutOfStock ? 'Out of Stock' : 'Add to Cart';
+            }
+
+            // Disable quantity controls if out of stock
+            const qtySection = document.querySelector('.product-modal-quantity');
+            if (qtySection) qtySection.style.display = isOutOfStock ? 'none' : 'block';
+
+            openModal('productModal');;
         });
     }
 }
