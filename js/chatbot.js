@@ -1,6 +1,6 @@
 // DreamDoughPH AI Chatbot
 const GEMINI_API_KEY = 'AIzaSyAPEPoZnLe-HomHaWe7NqElKk2t_Z0H-FQ';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
 let chatHistory = [];
 let productsContext = '';
@@ -55,30 +55,59 @@ async function sendMessage() {
     appendMessage('user', message);
     showTypingIndicator();
 
-    chatHistory.push({ role: 'user', parts: [{ text: message }] });
-
     try {
+        // Build contents with system prompt as first user message if first time
+        const contents = [];
+        
+        if (chatHistory.length === 0) {
+            contents.push({
+                role: 'user',
+                parts: [{ text: getSystemPrompt() + '\n\nUser message: ' + message }]
+            });
+        } else {
+            chatHistory.forEach(h => contents.push(h));
+            contents.push({ role: 'user', parts: [{ text: message }] });
+        }
+
         const response = await fetch(GEMINI_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                system_instruction: { parts: [{ text: getSystemPrompt() }] },
-                contents: chatHistory,
-                generationConfig: { maxOutputTokens: 300, temperature: 0.7 }
+                contents: contents,
+                generationConfig: { 
+                    maxOutputTokens: 400, 
+                    temperature: 0.7 
+                }
             })
         });
 
         const data = await response.json();
+        
+        if (data.error) {
+            console.error('Gemini error:', data.error);
+            hideTypingIndicator();
+            appendMessage('bot', "Sorry, I'm having trouble connecting right now. Please try again! 😊");
+            return;
+        }
+
         const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't process that. Please try again!";
 
         hideTypingIndicator();
         appendMessage('bot', reply);
+
+        // Store history properly
+        if (chatHistory.length === 0) {
+            chatHistory.push({ role: 'user', parts: [{ text: getSystemPrompt() + '\n\nUser message: ' + message }] });
+        } else {
+            chatHistory.push({ role: 'user', parts: [{ text: message }] });
+        }
         chatHistory.push({ role: 'model', parts: [{ text: reply }] });
 
         // Keep history manageable
         if (chatHistory.length > 20) chatHistory = chatHistory.slice(-20);
 
     } catch (error) {
+        console.error('Chat error:', error);
         hideTypingIndicator();
         appendMessage('bot', "Sorry, I'm having trouble connecting right now. Please try again in a moment! 😊");
     }
@@ -88,9 +117,7 @@ function appendMessage(sender, text) {
     const messages = document.getElementById('chatMessages');
     const div = document.createElement('div');
     div.className = `chat-message ${sender}-message`;
-    div.innerHTML = `
-        <div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>
-    `;
+    div.innerHTML = `<div class="message-bubble">${text.replace(/\n/g, '<br>')}</div>`;
     messages.appendChild(div);
     messages.scrollTop = messages.scrollHeight;
 }
