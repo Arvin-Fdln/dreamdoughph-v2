@@ -1458,6 +1458,7 @@ function editMenuItem(id, event) {
     document.getElementById('productDescription').value = item.description;
     document.getElementById('productCategory').value = item.category;
     document.getElementById('productPrice').value = item.price;
+    document.getElementById('productStock').value = item.stock !== undefined ? item.stock : 50;
     document.getElementById('productImage').value = item.image || '';
 
     // Update image preview
@@ -1515,11 +1516,14 @@ function handleProductSubmit(event) {
         return;
     }
 
+    const stockVal = parseInt(document.getElementById('productStock').value, 10);
+
     const itemData = {
         name: name,
         description: description,
         category: category,
         price: parseInt(priceNum, 10),
+        stock: isNaN(stockVal) ? 50 : stockVal,
         image: document.getElementById('productImage').value,
         updatedAt: new Date().toISOString()
     };
