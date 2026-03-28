@@ -1,6 +1,8 @@
 // DreamDoughPH AI Chatbot
 const GROQ_API_KEY = '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';
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
+let lastMessageTime = 0;
+const MESSAGE_COOLDOWN = 3000; // 3 seconds between messages
 
 let chatHistory = [];
 let productsContext = '';
@@ -50,6 +52,13 @@ async function sendMessage() {
     const input = document.getElementById('chatInput');
     const message = input.value.trim();
     if (!message) return;
+
+    const now = Date.now();
+    if (now - lastMessageTime < MESSAGE_COOLDOWN) {
+        appendMessage('bot', "Please wait a moment before sending another message! 😊");
+        return;
+    }
+    lastMessageTime = now;
 
     input.value = '';
     appendMessage('user', message);
