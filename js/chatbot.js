@@ -1,5 +1,5 @@
 // DreamDoughPH AI Chatbot
-const GEMINI_API_KEY = 'AIzaSyAPEPoZnLe-HomHaWe7NqElKk2t_Z0H-FQ';
+const GEMINI_API_KEY = 'AIzaSyBpTAsdCmpL-1lRYeISFLigyMBXPrYrJFM';
 const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
 
 let chatHistory = [];
