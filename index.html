@@ -822,6 +822,22 @@
 }
 </style>
 
+    <!-- AI Chat Widget -->
+    <div id="chatWidget">
+        <div class="chat-header" onclick="toggleChat()">
+            <span>🍰 DoughBot - Ask me anything!</span>
+            <span id="chatToggleIcon">▲</span>
+        </div>
+        <div class="chat-body">
+            <div id="chatMessages"></div>
+            <div class="chat-input-row">
+                <input type="text" id="chatInput" placeholder="Ask about our products..." onkeypress="handleChatKeyPress(event)">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+    <button class="chat-fab" onclick="toggleChat()">🍰</button>
+
     <!-- Firebase SDK - Version 8 (Compat) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
