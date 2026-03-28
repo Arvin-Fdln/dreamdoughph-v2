@@ -700,6 +700,18 @@ function handleCheckoutSubmit(event) {
     // Save to Firebase
     database.ref('orders').push(orderData)
         .then(() => {
+            // Reduce stock for each item ordered
+            const stockUpdates = {};
+            cart.forEach(item => {
+                database.ref('products').orderByChild('name').equalTo(item.name).once('value', snapshot => {
+                    snapshot.forEach(child => {
+                        const currentStock = child.val().stock || 0;
+                        const newStock = Math.max(0, currentStock - item.quantity);
+                        database.ref('products/' + child.key + '/stock').set(newStock);
+                    });
+                });
+            });
+
             // Success!
             closeModal('checkoutModal');
             
