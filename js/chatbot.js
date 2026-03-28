@@ -1,6 +1,6 @@
 // DreamDoughPH AI Chatbot
-const GEMINI_API_KEY = 'AIzaSyAPEPoZnLe-HomHaWe7NqElKk2t_Z0H-FQ';
-const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+const GROQ_API_KEY = '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';
+const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 let chatHistory = [];
 let productsContext = '';
@@ -69,38 +69,43 @@ async function sendMessage() {
             contents.push({ role: 'user', parts: [{ text: message }] });
         }
 
-        const response = await fetch(GEMINI_URL, {
+        const response = await fetch(GROQ_URL, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${GROQ_API_KEY}`
+            },
             body: JSON.stringify({
-                contents: contents,
-                generationConfig: { 
-                    maxOutputTokens: 400, 
-                    temperature: 0.7 
-                }
+                model: 'llama-3.1-8b-instant',
+                messages: [
+                    { role: 'system', content: getSystemPrompt() },
+                    ...chatHistory.map(h => ({
+                        role: h.role === 'model' ? 'assistant' : h.role,
+                        content: h.parts[0].text
+                    })),
+                    { role: 'user', content: message }
+                ],
+                max_tokens: 400,
+                temperature: 0.7
             })
         });
 
         const data = await response.json();
-        
+
         if (data.error) {
-            console.error('Gemini error:', data.error);
+            console.error('Groq error:', data.error);
             hideTypingIndicator();
             appendMessage('bot', "Sorry, I'm having trouble connecting right now. Please try again! 😊");
             return;
         }
 
-        const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't process that. Please try again!";
+        const reply = data.choices?.[0]?.message?.content || "Sorry, I couldn't process that. Please try again!";
 
         hideTypingIndicator();
         appendMessage('bot', reply);
 
-        // Store history properly
-        if (chatHistory.length === 0) {
-            chatHistory.push({ role: 'user', parts: [{ text: getSystemPrompt() + '\n\nUser message: ' + message }] });
-        } else {
-            chatHistory.push({ role: 'user', parts: [{ text: message }] });
-        }
+        // Store history
+        chatHistory.push({ role: 'user', parts: [{ text: message }] });
         chatHistory.push({ role: 'model', parts: [{ text: reply }] });
 
         // Keep history manageable
