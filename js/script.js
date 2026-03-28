@@ -1429,8 +1429,18 @@ function changeModalQuantity(change) {
 
 function addToCartFromModal() {
     if (!currentModalProduct) return;
+    const stock = currentModalProduct.stock !== undefined ? currentModalProduct.stock : 999;
+    if (stock <= 0) {
+        showNotification('Sorry, this item is out of stock!', 'error');
+        return;
+    }
     let cartId = currentModalProduct.category === 'custom' ? `custom-${currentModalProduct.id}` : currentModalProduct.id;
     const existingItem = cart.find(item => item.cartId === cartId);
+    const currentQty = existingItem ? existingItem.quantity : 0;
+    if (currentQty + modalQuantity > stock) {
+        showNotification(`Sorry! Only ${stock} left in stock.`, 'error');
+        return;
+    }
     if (existingItem) {
         existingItem.quantity += modalQuantity;
     } else {
@@ -1439,6 +1449,7 @@ function addToCartFromModal() {
             name: currentModalProduct.name, 
             price: currentModalProduct.price, 
             quantity: modalQuantity,
+            stock: stock,
             category: currentModalProduct.category
         });
     }
