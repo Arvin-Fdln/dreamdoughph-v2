@@ -389,15 +389,16 @@ function createProductCard(product) {
     const category = product.category || '';
     const image = product.image || '🰰';
     const productId = product.id || '';
-    
+    const stock = product.stock !== undefined ? product.stock : 999;
+    const isOutOfStock = stock <= 0;
+
     let imageHTML;
     if (image.startsWith('http://') || image.startsWith('https://')) {
         imageHTML = `<img src="${image}" alt="${name}" style="width: 100%; height: 100%; object-fit: cover;">`;
     } else {
         imageHTML = image;
     }
-    
-    // For custom items, remove price and add-to-cart button outside modal
+
     if (category.toLowerCase() === 'custom') {
         return `
             <div class="product-card" data-name="${name.toLowerCase()}" data-category="custom" onclick="openProductDetails('${productId}', true)">
@@ -410,13 +411,17 @@ function createProductCard(product) {
         `;
     } else {
         return `
-            <div class="product-card" data-name="${name.toLowerCase()}" data-category="${category.toLowerCase()}" onclick="openProductDetails('${productId}')">
-                <div class="product-image">${imageHTML}</div>
+            <div class="product-card ${isOutOfStock ? 'out-of-stock-card' : ''}" data-name="${name.toLowerCase()}" data-category="${category.toLowerCase()}" onclick="openProductDetails('${productId}')">
+                <div class="product-image" style="position:relative;">
+                    ${imageHTML}
+                    ${isOutOfStock ? '<div class="out-of-stock-badge">Out of Stock</div>' : ''}
+                </div>
                 <div class="product-info">
                     <h3>${name}</h3>
                     <p>${description.substring(0, 60)}${description.length > 60 ? '...' : ''}</p>
                     <div class="product-price">₱${price}</div>
-                    <button class="add-to-cart" onclick="event.stopPropagation(); addToCart('${name.replace(/'/g, "\\'")}', ${product.price})">Add to Cart</button>
+                    <div class="stock-indicator ${stock <= 10 ? 'low-stock' : ''}">${isOutOfStock ? 'Out of Stock' : `${stock} left`}</div>
+                    <button class="add-to-cart" ${isOutOfStock ? 'disabled' : ''} onclick="event.stopPropagation(); ${isOutOfStock ? '' : `addToCart('${name.replace(/'/g, "\\'")}', ${product.price}, ${stock})`}">${isOutOfStock ? 'Out of Stock' : 'Add to Cart'}</button>
                 </div>
             </div>
         `;
