@@ -3458,3 +3458,35 @@ body.sidebar-open {
     border-color: #f9c0c0;
   }
 }
+
+/* Stock System */
+.stock-indicator {
+    font-size: 0.78rem;
+    color: var(--light-brown);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+.stock-indicator.low-stock {
+    color: #e67e22;
+    font-weight: 700;
+}
+.out-of-stock-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #e74c3c;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    z-index: 2;
+}
+.out-of-stock-card {
+    opacity: 0.75;
+}
+.add-to-cart:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    color: #888;
+}
