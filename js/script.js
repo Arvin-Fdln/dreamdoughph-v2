@@ -545,12 +545,17 @@ function handleSwipe(gridId) {
 }
 
 // Cart Functions
-function addToCart(name, price) {
+function addToCart(name, price, stock) {
     const existingItem = cart.find(item => item.name === name);
+    const currentQty = existingItem ? existingItem.quantity : 0;
+    if (currentQty >= stock) {
+        showNotification(`Sorry! Only ${stock} left in stock.`, 'error');
+        return;
+    }
     if (existingItem) {
         existingItem.quantity++;
     } else {
-        cart.push({ name, price, quantity: 1 });
+        cart.push({ name, price, quantity: 1, stock });
     }
     updateCartCount();
     showNotification(`${name} added to cart!`);
