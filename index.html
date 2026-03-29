@@ -434,8 +434,19 @@
             </div>
             
             <div style="margin-bottom: 1rem;">
-                <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Delivery Address (Optional)</label>
-                <textarea id="checkoutAddress" rows="2" placeholder="Complete address for delivery" style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif; resize: vertical;"></textarea>
+            <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Order Type *</label>
+                <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
+                        <input type="radio" name="orderType" value="pickup" id="orderTypePickup" checked onchange="toggleDeliveryAddress()"> 🏪 Pickup
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
+                        <input type="radio" name="orderType" value="delivery" id="orderTypeDelivery" onchange="toggleDeliveryAddress()"> 🚚 Delivery
+                    </label>
+                </div>
+                <div id="deliveryAddressSection" style="display:none;">
+                    <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Delivery Address *</label>
+                    <textarea id="checkoutAddress" rows="2" placeholder="Complete address for delivery" style="width: 100%; padding: 0.8rem; border: 2px solid var(--light-brown); border-radius: 8px; font-size: 1rem; font-family: 'Georgia', serif; resize: vertical;"></textarea>
+                </div>
             </div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
