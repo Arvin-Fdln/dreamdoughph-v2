@@ -5851,3 +5851,128 @@ html, body {
         padding: 0.3rem 0.6rem;
     }
 }
+
+/* Admin AI Assistant */
+.admin-chat-fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 9998;
+    transition: transform 0.3s;
+}
+.admin-chat-fab:hover { transform: scale(1.1); }
+
+#adminChatWidget {
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2rem;
+    width: 360px;
+    max-height: 500px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    z-index: 9997;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+#adminChatWidget.open { display: flex; }
+
+.admin-chat-header {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.admin-chat-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+}
+
+#adminChatMessages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-height: 350px;
+}
+
+.admin-chat-message { display: flex; }
+.admin-chat-message.user-message { justify-content: flex-end; }
+.admin-chat-message.bot-message { justify-content: flex-start; }
+
+.admin-message-bubble {
+    max-width: 85%;
+    padding: 0.6rem 0.9rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+.user-message .admin-message-bubble {
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+.bot-message .admin-message-bubble {
+    background: #f1f5f9;
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+}
+
+.admin-chat-input-row {
+    display: flex;
+    padding: 0.75rem;
+    gap: 0.5rem;
+    border-top: 1px solid var(--border);
+}
+.admin-chat-input-row input {
+    flex: 1;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    outline: none;
+}
+.admin-chat-input-row button {
+    padding: 0.5rem 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    #adminChatWidget {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+        bottom: 5rem;
+        max-height: 70vh;
+    }
+    .admin-chat-fab {
+        bottom: 1.2rem;
+        right: 1rem;
+    }
+}
