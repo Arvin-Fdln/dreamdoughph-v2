@@ -5953,6 +5953,7 @@ html, body {
     font-size: 0.85rem;
     outline: none;
     color: #1e293b;
+    background-color: #ffffff;
 }
 .admin-chat-input-row button {
     padding: 0.5rem 1rem;
