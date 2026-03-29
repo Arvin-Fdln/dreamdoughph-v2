@@ -758,7 +758,8 @@ function displayOrdersBySections() {
     const ordersByStatus = {
         pending: ordersData.filter(o => o.status === 'pending'),
         confirmed: ordersData.filter(o => o.status === 'confirmed'),
-        adjustment: ordersData.filter(o => o.status === 'adjustment'),
+        preparing: ordersData.filter(o => o.status === 'preparing'),
+        ready: ordersData.filter(o => o.status === 'ready'),
         completed: ordersData.filter(o => o.status === 'completed'),
         cancelled: ordersData.filter(o => o.status === 'cancelled')
     };
@@ -1048,7 +1049,8 @@ function updateStatusDisplay(status) {
 function quickAction(action) {
     const statusMap = {
         'confirm': 'confirmed',
-        'adjustment': 'adjustment', 
+        'preparing': 'preparing',
+        'ready': 'ready',
         'complete': 'completed',
         'cancel': 'cancelled'
     };
