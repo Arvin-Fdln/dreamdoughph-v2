@@ -5952,6 +5952,7 @@ html, body {
     border-radius: 20px;
     font-size: 0.85rem;
     outline: none;
+    color: #1e293b;
 }
 .admin-chat-input-row button {
     padding: 0.5rem 1rem;
