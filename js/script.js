@@ -1,12 +1,5 @@
 // Cart functionality
 let cart = [];
-function toggleDeliveryAddress() {
-    const isDelivery = document.getElementById('orderTypeDelivery').checked;
-    const section = document.getElementById('deliveryAddressSection');
-    const addressField = document.getElementById('checkoutAddress');
-    section.style.display = isDelivery ? 'block' : 'none';
-    addressField.required = isDelivery;
-}
 
 // Carousel state management
 const carouselStates = {};
@@ -109,14 +102,30 @@ function displayProductsByCategory(allProducts, category, gridId, productCount) 
     // Custom Orders Section: Show message and robustly hide buttons if no products
     if (gridId === 'customOrdersGrid') {
         if (filteredProducts.length === 0) {
-            const entireSection = grid.closest('.product-section');
-            if (entireSection) entireSection.style.display = 'none';
-            grid.innerHTML = '';
+            grid.innerHTML = `
+                <div style="width: 100%; text-align: center; padding: 2rem;">
+                    <p style="color: var(--light-brown); font-size: 1.1rem; margin-bottom: 1rem;">
+                        No custom product has been uploaded
+                    </p>
+                </div>
+            `;
+            const section = grid.closest('.product-carousel-wrapper');
+            if (section) {
+                // Hide buttons robustly
+                const hideButtons = () => {
+                    const prevBtn = section.querySelector('.carousel-nav.prev');
+                    const nextBtn = section.querySelector('.carousel-nav.next');
+                    if (prevBtn) prevBtn.style.display = 'none';
+                    if (nextBtn) nextBtn.style.display = 'none';
+                };
+                hideButtons();
+                // In case buttons are added later, observe and hide them
+                const observer = new MutationObserver(hideButtons);
+                observer.observe(section, { childList: true, subtree: true });
+            }
             return;
-        } else {
-            const entireSection = grid.closest('.product-section');
-            if (entireSection) entireSection.style.display = 'block';
         }
+    }
     
     // Set data attribute for product count
     grid.setAttribute('data-count', filteredProducts.length);
