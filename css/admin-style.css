@@ -5978,3 +5978,10 @@ html, body {
         right: 1rem;
     }
 }
+
+#adminChatWidget input,
+#adminChatWidget input::placeholder {
+    color: #1e293b !important;
+    background-color: #ffffff !important;
+    -webkit-text-fill-color: #1e293b !important;
+}
