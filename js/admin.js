@@ -1035,8 +1035,9 @@ function updateStatusDisplay(status) {
     const statusDisplay = document.getElementById('currentStatusDisplay');
     const statusText = {
         'pending': '📝 Pending Review',
-        'confirmed': '✅ Confirmed', 
-        'adjustment': '✏️ Needs Adjustment',
+        'confirmed': '✅ Confirmed',
+        'preparing': '👨‍🍳 Preparing',
+        'ready': '🎁 Ready for Pickup',
         'completed': '🎉 Completed',
         'cancelled': '❌ Cancelled'
     }[status] || '📝 Pending Review';
