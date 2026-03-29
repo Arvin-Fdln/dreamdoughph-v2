@@ -1126,6 +1126,22 @@ Sunday: 9AM - 9PM"></textarea>
 
     <!-- Config and Admin JS -->
     <script src="js/firebase-config.js"></script>
+    <!-- Admin AI Assistant Widget -->
+    <div id="adminChatWidget">
+        <div class="admin-chat-header" onclick="toggleAdminChat()">
+            <span>🤖 AI Assistant</span>
+            <span>▲</span>
+        </div>
+        <div class="admin-chat-body">
+            <div id="adminChatMessages"></div>
+            <div class="admin-chat-input-row">
+                <input type="text" id="adminChatInput" placeholder="Ask about orders, stock, revenue..." onkeypress="handleAdminChatKeyPress(event)">
+                <button onclick="sendAdminMessage()">Ask</button>
+            </div>
+        </div>
+    </div>
+    <button class="admin-chat-fab" onclick="toggleAdminChat()">🤖</button>
+    <script src="js/admin-ai.js"></script>
     <script src="js/admin.js?v=3.5"></script>
 
     <script>
