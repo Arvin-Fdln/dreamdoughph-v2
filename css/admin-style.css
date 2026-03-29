@@ -5929,8 +5929,9 @@ html, body {
     line-height: 1.5;
 }
 .user-message .admin-message-bubble {
-    background: var(--primary);
-    color: white;
+    background: #2563eb;
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
     border-bottom-right-radius: 4px;
 }
 .bot-message .admin-message-bubble {
