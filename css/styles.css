@@ -3524,6 +3524,26 @@ body.sidebar-open {
     flex-direction: column;
     overflow: hidden;
 }
+
+@media (max-width: 480px) {
+    #chatWidget {
+        width: calc(100vw - 2rem);
+        right: 1rem;
+        bottom: 5rem;
+        max-height: 70vh;
+    }
+    .chat-fab {
+        bottom: 1.2rem;
+        right: 1rem;
+        width: 52px;
+        height: 52px;
+        font-size: 1.5rem;
+    }
+    #chatMessages {
+        max-height: 55vh;
+    }
+}
+
 #chatWidget.open { display: flex; }
 
 .chat-header {
