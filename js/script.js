@@ -109,12 +109,11 @@ function displayProductsByCategory(allProducts, category, gridId, productCount) 
     // Custom Orders Section: Show message and robustly hide buttons if no products
     if (gridId === 'customOrdersGrid') {
         if (filteredProducts.length === 0) {
-            // Hide the entire custom orders section
             const entireSection = grid.closest('.product-section');
             if (entireSection) entireSection.style.display = 'none';
+            grid.innerHTML = '';
             return;
         } else {
-            // Show it if products exist
             const entireSection = grid.closest('.product-section');
             if (entireSection) entireSection.style.display = 'block';
         }
