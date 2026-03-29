@@ -437,10 +437,10 @@
             <label style="display: block; color: var(--brown); font-weight: 600; margin-bottom: 0.5rem;">Order Type *</label>
                 <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
                     <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                        <input type="radio" name="orderType" value="pickup" id="orderTypePickup" checked onchange="toggleDeliveryAddress()"> 🏪 Pickup
+                        <input type="radio" name="orderType" value="pickup" id="orderTypePickup" checked onclick="toggleDeliveryAddress()"> 🏪 Pickup
                     </label>
                     <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: normal;">
-                        <input type="radio" name="orderType" value="delivery" id="orderTypeDelivery" onchange="toggleDeliveryAddress()"> 🚚 Delivery
+                        <input type="radio" name="orderType" value="delivery" id="orderTypeDelivery" onclick="toggleDeliveryAddress()"> 🚚 Delivery
                     </label>
                 </div>
                 <div id="deliveryAddressSection" style="display:none;">
