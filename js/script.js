@@ -1,5 +1,12 @@
 // Cart functionality
 let cart = [];
+function toggleDeliveryAddress() {
+    const isDelivery = document.getElementById('orderTypeDelivery').checked;
+    const section = document.getElementById('deliveryAddressSection');
+    const addressField = document.getElementById('checkoutAddress');
+    section.style.display = isDelivery ? 'block' : 'none';
+    addressField.required = isDelivery;
+}
 
 // Carousel state management
 const carouselStates = {};
