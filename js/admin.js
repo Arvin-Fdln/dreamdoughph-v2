@@ -1295,10 +1295,13 @@ function loadMenuItems() {
             // Update stats
             menuStats.total++;
             
-            // Count by category
-            if (item.category === 'cakes') menuStats.cakes++;
-            else if (item.category === 'cookies') menuStats.cookies++;
-            else if (item.category === 'cupcakes') menuStats.cupcakes++;
+           // Count by category dynamically
+            const cat = item.category ? item.category.toLowerCase() : '';
+            if (menuStats.hasOwnProperty(cat)) {
+                menuStats[cat]++;
+            } else {
+                menuStats[cat] = 1;
+            }
             
             // Calculate average price
             totalPrice += item.price || 0;
@@ -1335,6 +1338,9 @@ function loadMenuItems() {
         
         document.getElementById('lastUpdated').textContent = lastUpdated ? 
             formatDate(lastUpdated) : '-';
+        
+        // Sort newest first
+        menuItemsData.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
         
         // Display items
         filterMenuItems();
