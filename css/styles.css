@@ -1072,8 +1072,17 @@ nav {
     padding-top: 2rem;
 }
 
+.product-section:nth-child(odd) {
+    background: white;
+}
 .product-section:nth-child(even) {
-    background: var(--cream);
+    background: var(--soft-cream);
+}
+#dynamicCategorySections .product-section:nth-child(odd) {
+    background: white;
+}
+#dynamicCategorySections .product-section:nth-child(even) {
+    background: var(--soft-cream);
 }
 
 /* Empty State Styles */
