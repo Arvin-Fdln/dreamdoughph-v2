@@ -14,84 +14,98 @@ const carouselStates = {};
 // In your loadProducts function, add custom orders handling
 function loadProducts() {
     console.log('📦 Loading products from Firebase...');
-    
-    // Load business settings
     loadBusinessSettings();
-    
-    // Load store hours
     loadStoreHours();
-    
-    // Load social media links
     loadSocialLinks();
-
     loadFeaturedProduct();
 
-    // Track product counts per category
-    let categoryCounts = {
-        cakes: 0,
-        cookies: 0,
-        cupcakes: 0,
-        custom: 0 // ADD THIS
+    // Load categories first, then products
+    database.ref('categories').once('value', (catSnapshot) => {
+        let categories = [];
+        if (catSnapshot.exists()) {
+            catSnapshot.forEach(child => {
+                categories.push({ key: child.key, ...child.val() });
+            });
+            categories.sort((a, b) => (a.order || 0) - (b.order || 0));
+        } else {
+            // Fallback to defaults
+            categories = [
+                { key: 'cakes', name: 'Cakes', icon: '🎂', order: 1 },
+                { key: 'cookies', name: 'Cookies', icon: '🍪', order: 2 },
+                { key: 'cupcakes', name: 'Cupcakes', icon: '🧁', order: 3 }
+            ];
+        }
+
+        // Build dynamic sections
+        buildCategorySections(categories);
+
+        // Now load products
+        database.ref('products').on('value', (snapshot) => {
+            let allProducts = [];
+            snapshot.forEach((childSnapshot) => {
+                allProducts.push({ id: childSnapshot.key, ...childSnapshot.val() });
+            });
+
+            // Load custom items
+            database.ref('customItems').once('value').then((customSnapshot) => {
+                const customItems = [];
+                customSnapshot.forEach((childSnapshot) => {
+                    customItems.push({ id: childSnapshot.key, ...childSnapshot.val(), category: 'custom' });
+                });
+                allProducts = allProducts.concat(customItems);
+
+                // Display each category
+                categories.forEach(cat => {
+                    const gridId = cat.key + 'Grid';
+                    const count = allProducts.filter(p => p.category && p.category.toLowerCase() === cat.key.toLowerCase()).length;
+                    displayProductsByCategory(allProducts, cat.key, gridId, count);
+                });
+
+                // Display custom orders
+                const customCount = customItems.length;
+                const customSection = document.getElementById('customorders');
+                if (customCount === 0) {
+                    if (customSection) customSection.style.display = 'none';
+                } else {
+                    if (customSection) customSection.style.display = 'block';
+                    displayProductsByCategory(allProducts, 'custom', 'customOrdersGrid', customCount);
+                }
+
+            }).catch(error => {
+                console.error('❌ Error loading custom items:', error);
+            });
+        });
+    });
+}
+
+function buildCategorySections(categories) {
+    const container = document.getElementById('dynamicCategorySections');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const subtitles = {
+        cakes: 'Handcrafted masterpieces for every celebration',
+        cookies: 'Crunchy, chewy, and absolutely irresistible',
+        cupcakes: 'Perfect little treats for any occasion'
     };
 
-    // Load all products
-    database.ref('products').on('value', (snapshot) => {
-        console.log('📦 Products snapshot received');
-        let allProducts = [];
-        // Reset counts
-        categoryCounts = {
-            cakes: 0,
-            cookies: 0,
-            cupcakes: 0,
-            custom: 0 // ADD THIS
-        };
-        snapshot.forEach((childSnapshot) => {
-            const product = childSnapshot.val();
-            console.log('Product found:', product);
-            // Count products by category
-            const category = product.category ? product.category.toLowerCase() : '';
-            if (categoryCounts.hasOwnProperty(category)) {
-                categoryCounts[category]++;
-            }
-            allProducts.push({
-                id: childSnapshot.key,
-                ...product
-            });
-        });
-
-        // Now load custom items and merge with custom products
-        database.ref('customItems').once('value').then((customSnapshot) => {
-            const customItems = [];
-            customSnapshot.forEach((childSnapshot) => {
-                const item = childSnapshot.val();
-                // Add a category property so it is treated as a custom product
-                customItems.push({
-                    id: childSnapshot.key,
-                    ...item,
-                    category: 'custom'
-                });
-            });
-            // Merge custom items into allProducts
-            allProducts = allProducts.concat(customItems);
-            // Update custom count
-            categoryCounts.custom += customItems.length;
-
-            console.log('Merged custom items:', customItems.length);
-            // Separate products by category and pass counts
-            displayProductsByCategory(allProducts, 'cakes', 'cakesGrid', categoryCounts.cakes);
-            displayProductsByCategory(allProducts, 'cookies', 'cookiesGrid', categoryCounts.cookies);
-            displayProductsByCategory(allProducts, 'cupcakes', 'cupcakesGrid', categoryCounts.cupcakes);
-            displayProductsByCategory(allProducts, 'custom', 'customOrdersGrid', categoryCounts.custom);
-        }).catch((error) => {
-            console.error('❌ Error loading custom items:', error);
-            // Fallback: show only products
-            displayProductsByCategory(allProducts, 'cakes', 'cakesGrid', categoryCounts.cakes);
-            displayProductsByCategory(allProducts, 'cookies', 'cookiesGrid', categoryCounts.cookies);
-            displayProductsByCategory(allProducts, 'cupcakes', 'cupcakesGrid', categoryCounts.cupcakes);
-            displayProductsByCategory(allProducts, 'custom', 'customOrdersGrid', categoryCounts.custom);
-        });
-    }, (error) => {
-        console.error('❌ Error loading products:', error);
+    categories.forEach(cat => {
+        const gridId = cat.key + 'Grid';
+        const subtitle = subtitles[cat.key] || `Our finest ${cat.name}`;
+        const section = document.createElement('section');
+        section.className = 'product-section';
+        section.id = cat.key;
+        section.style.display = 'none'; // hidden until products load
+        section.innerHTML = `
+            <div class="section-header">
+                <h2>${cat.icon || ''} ${cat.name}</h2>
+                <p>${subtitle}</p>
+            </div>
+            <div class="product-carousel-wrapper">
+                <div class="product-grid" id="${gridId}"></div>
+            </div>
+        `;
+        container.appendChild(section);
     });
 }
 
@@ -101,6 +115,13 @@ function displayProductsByCategory(allProducts, category, gridId, productCount) 
     const grid = document.getElementById(gridId);
     if (!grid) return;
     grid.innerHTML = '';
+
+    // Auto show/hide the section based on product count
+    const section = grid.closest('.product-section');
+    if (section && gridId !== 'customOrdersGrid') {
+        section.style.display = productCount === 0 ? 'none' : 'block';
+    }
+    if (productCount === 0 && gridId !== 'customOrdersGrid') return;
 
     const filteredProducts = allProducts.filter(product =>
         product.category && product.category.toLowerCase() === category
