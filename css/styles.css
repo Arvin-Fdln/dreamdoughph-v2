@@ -1073,13 +1073,13 @@ nav {
 }
 
 .product-section:nth-child(odd) {
-    background: var(--soft-cream);
+    background: var(--cream);
 }
 .product-section:nth-child(even) {
     background: var(--soft-cream);
 }
 #dynamicCategorySections .product-section:nth-child(odd) {
-    background: var(--soft-cream);
+    background: var(--cream);
 }
 #dynamicCategorySections .product-section:nth-child(even) {
     background: var(--soft-cream);
