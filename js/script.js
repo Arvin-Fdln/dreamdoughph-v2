@@ -98,7 +98,7 @@ function buildCategorySections(categories) {
         section.style.display = 'none'; // hidden until products load
         section.innerHTML = `
             <div class="section-header">
-                <h2>${cat.icon || ''} ${cat.name}</h2>
+                <h2>${cat.name}</h2>
                 <p>${subtitle}</p>
             </div>
             <div class="product-carousel-wrapper">
