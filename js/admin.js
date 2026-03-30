@@ -61,12 +61,97 @@ let customStartDate = null;
 let customEndDate = null;
 let isExpandedView = true;
 
+// ============= CATEGORY MANAGEMENT =============
+function loadCategories() {
+    database.ref('categories').once('value', snapshot => {
+        const categories = [];
+        snapshot.forEach(child => {
+            categories.push({ key: child.key, ...child.val() });
+        });
+        categories.sort((a, b) => (a.order || 0) - (b.order || 0));
+
+        // Update categories list UI
+        const list = document.getElementById('categoriesList');
+        if (list) {
+            list.innerHTML = categories.map(cat => `
+                <div style="display:inline-flex; align-items:center; gap:0.5rem; background:var(--bg); border:1px solid var(--border); border-radius:20px; padding:0.4rem 0.8rem; font-size:0.85rem;">
+                    <span>${cat.icon || ''} ${cat.name}</span>
+                    ${cat.protected ? '<span style="color:#888; font-size:0.75rem;">🔒</span>' : `<button onclick="deleteCategory('${cat.key}')" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-size:0.9rem; padding:0;">✕</button>`}
+                </div>
+            `).join('');
+        }
+
+        // Update category filter dropdown
+        const filter = document.getElementById('categoryFilter');
+        if (filter) {
+            filter.innerHTML = '<option value="">All Categories</option>' +
+                categories.map(cat => `<option value="${cat.key}">${cat.icon || ''} ${cat.name}</option>`).join('');
+        }
+
+        // Update product category dropdown
+        const productCat = document.getElementById('productCategory');
+        if (productCat) {
+            const current = productCat.value;
+            productCat.innerHTML = '<option value="">Select Category</option>' +
+                categories.map(cat => `<option value="${cat.key}" ${current === cat.key ? 'selected' : ''}>${cat.icon || ''} ${cat.name}</option>`).join('');
+        }
+    });
+}
+
+function openAddCategoryModal() {
+    document.getElementById('newCategoryName').value = '';
+    document.getElementById('newCategoryIcon').value = '';
+    document.getElementById('addCategoryModal').style.display = 'flex';
+}
+
+function closeAddCategoryModal() {
+    document.getElementById('addCategoryModal').style.display = 'none';
+}
+
+function saveNewCategory() {
+    const name = document.getElementById('newCategoryName').value.trim();
+    const icon = document.getElementById('newCategoryIcon').value.trim();
+    if (!name) { showToast('Please enter a category name!', 'error'); return; }
+    if (!icon) { showToast('Please enter an emoji icon!', 'error'); return; }
+
+    const key = name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+
+    database.ref('categories/' + key).once('value', snap => {
+        if (snap.exists()) {
+            showToast('Category already exists!', 'error');
+            return;
+        }
+        database.ref('categories').once('value', allSnap => {
+            const order = allSnap.numChildren() + 1;
+            database.ref('categories/' + key).set({
+                name: name,
+                icon: icon,
+                protected: false,
+                order: order
+            }).then(() => {
+                showToast('✅ Category added!');
+                closeAddCategoryModal();
+                loadCategories();
+            }).catch(err => showToast('❌ Error: ' + err.message, 'error'));
+        });
+    });
+}
+
+function deleteCategory(key) {
+    if (!confirm(`Delete this category? Products in this category will still exist but won't show on the website until reassigned.`)) return;
+    database.ref('categories/' + key).remove().then(() => {
+        showToast('✅ Category deleted!');
+        loadCategories();
+    }).catch(err => showToast('❌ Error: ' + err.message, 'error'));
+}
+
 // ============= INITIALIZE EVERYTHING =============
 // Update the main initialization
 document.addEventListener('DOMContentLoaded', () => {
     setupSectionShortcuts();
     checkAuth();
     setupEventListeners();
+    loadCategories();
     startLiveTimer();
     updatePageTitle();
     initializePaymentTracking();
