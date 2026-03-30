@@ -117,9 +117,9 @@ function displayProductsByCategory(allProducts, category, gridId, productCount) 
     grid.innerHTML = '';
 
     // Auto show/hide the section based on product count
-    const section = grid.closest('.product-section');
-    if (section && gridId !== 'customOrdersGrid') {
-        section.style.display = productCount === 0 ? 'none' : 'block';
+    const parentSection = grid.closest('.product-section');
+    if (parentSection && gridId !== 'customOrdersGrid') {
+        parentSection.style.display = productCount === 0 ? 'none' : 'block';
     }
     if (productCount === 0 && gridId !== 'customOrdersGrid') return;
 
