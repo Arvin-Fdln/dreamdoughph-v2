@@ -241,13 +241,19 @@
         <div class="filter-actions">
             <select id="categoryFilter" class="filter-select">
                 <option value="">All Categories</option>
-                <option value="cakes">Cakes</option>
-                <option value="cookies">Cookies</option>
-                <option value="cupcakes">Cupcakes</option>
             </select>
         </div>
     </div>
-  
+
+    <!-- Category Management -->
+    <div class="category-management" style="margin-bottom: 2rem; padding: 1.5rem; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <h3 style="margin: 0; color: var(--text);">📂 Categories</h3>
+            <button class="btn-primary" onclick="openAddCategoryModal()" style="padding: 0.5rem 1rem; font-size: 0.85rem;">+ Add Category</button>
+        </div>
+        <div id="categoriesList" style="display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+    </div>
+    
     <!-- Menu Items Grid -->
     <div id="menuItemsGrid" class="menu-items-grid active">
         <!-- Items will load here -->
@@ -713,9 +719,6 @@ Sunday: 9AM - 9PM"></textarea>
                             <label>Category</label>
                             <select id="productCategory" required class="form-input">
                                 <option value="">Select Category</option>
-                                <option value="cakes">Cakes</option>
-                                <option value="cookies">Cookies</option>
-                                <option value="cupcakes">Cupcakes</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -1156,6 +1159,25 @@ Sunday: 9AM - 9PM"></textarea>
         }
     });
     </script>
+
+    <!-- Add Category Modal -->
+<div id="addCategoryModal" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center;">
+    <div style="background:white; border-radius:16px; padding:2rem; width:90%; max-width:400px;">
+        <h3 style="margin-bottom:1.5rem;">Add New Category</h3>
+        <div class="form-group">
+            <label>Category Name *</label>
+            <input type="text" id="newCategoryName" class="form-input" placeholder="e.g. Brownies">
+        </div>
+        <div class="form-group">
+            <label>Icon (emoji) *</label>
+            <input type="text" id="newCategoryIcon" class="form-input" placeholder="e.g. 🍫" maxlength="2">
+        </div>
+        <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+            <button class="btn-secondary" onclick="closeAddCategoryModal()" style="flex:1;">Cancel</button>
+            <button class="btn-primary" onclick="saveNewCategory()" style="flex:1;">Add Category</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
