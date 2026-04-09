@@ -1,4 +1,5 @@
-// DreamDoughPH AI Chatbot
+// DreamDoughPH AI Chatbot - IMPROVED VERSION
+// Now with better product context including timestamps for identifying latest products
 const GROQ_API_KEY = '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';
 const GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 let lastMessageTime = 0;
@@ -6,21 +7,63 @@ const MESSAGE_COOLDOWN = 3000; // 3 seconds between messages
 
 let chatHistory = [];
 let productsContext = '';
+let allProductsData = []; // Store full product data for reference
 
-// Load products from Firebase for AI context
+// Load products from Firebase for AI context with timestamps
 function loadProductsForAI() {
     database.ref('products').once('value', snapshot => {
         const products = [];
+        allProductsData = [];
+        
         snapshot.forEach(child => {
             const p = child.val();
-            products.push(`${p.name} (${p.category}) - ₱${p.price} - Stock: ${p.stock !== undefined ? p.stock : 'N/A'} - ${p.description}`);
+            allProductsData.push({
+                id: child.key,
+                name: p.name,
+                category: p.category,
+                price: p.price,
+                stock: p.stock !== undefined ? p.stock : 'N/A',
+                description: p.description,
+                createdAt: p.createdAt,
+                updatedAt: p.updatedAt,
+                image: p.image
+            });
         });
+        
+        // Sort by creation date (newest first)
+        allProductsData.sort((a, b) => {
+            const dateA = new Date(a.createdAt || 0).getTime();
+            const dateB = new Date(b.createdAt || 0).getTime();
+            return dateB - dateA;
+        });
+        
+        // Build context with product information including timestamps
+        products.push('=== LATEST PRODUCTS (Most Recently Added) ===');
+        allProductsData.slice(0, 5).forEach((p, idx) => {
+            const dateAdded = new Date(p.createdAt).toLocaleDateString('en-PH');
+            products.push(`${idx + 1}. ${p.name} (${p.category}) - ₱${p.price} - Stock: ${p.stock} - Added: ${dateAdded} - ${p.description}`);
+        });
+        
+        products.push('\n=== ALL PRODUCTS (Organized by Category) ===');
+        const categories = {};
+        allProductsData.forEach(p => {
+            if (!categories[p.category]) categories[p.category] = [];
+            categories[p.category].push(p);
+        });
+        
+        Object.keys(categories).sort().forEach(cat => {
+            products.push(`\n${cat.toUpperCase()}:`);
+            categories[cat].forEach(p => {
+                products.push(`  - ${p.name}: ₱${p.price} (Stock: ${p.stock}) - ${p.description}`);
+            });
+        });
+        
         productsContext = products.join('\n');
     });
 }
 
 function getSystemPrompt() {
-    return `You are DoughBot, a friendly and helpful AI assistant for DreamDoughPH, a bakery based in Antipolo, Rizal, Philippines. 
+    return `You are DoughBot, a friendly and helpful AI assistant for DreamDoughPH, a bakery based in Antipolo, Rizal, Philippines.
 
 ABOUT THE BAKERY:
 - Name: DreamDoughPH
@@ -35,6 +78,8 @@ CURRENT PRODUCTS AND STOCK:
 ${productsContext}
 
 YOUR RULES:
+- When asked about "new products", "latest products", "newest items", or "recently added", refer to the "LATEST PRODUCTS" section at the top - these are sorted by most recent first
+- The first 5 products listed are the NEWEST ones we've added
 - Only answer questions related to DreamDoughPH, our products, orders, delivery, and bakery info
 - Be friendly, warm, and use a casual but professional tone
 - If asked about stock, refer to the stock numbers above
@@ -45,7 +90,8 @@ YOUR RULES:
 - Do NOT discuss topics unrelated to the bakery
 - Keep responses concise and helpful
 - Use Filipino-friendly language when appropriate (you can mix a little Tagalog naturally)
-- Always end with an offer to help further`;
+- Always end with an offer to help further
+- When recommending products, prioritize the latest ones when appropriate`;
 }
 
 async function sendMessage() {
@@ -159,7 +205,7 @@ function toggleChat() {
     } else {
         widget.classList.add('open');
         if (chatHistory.length === 0) {
-            appendMessage('bot', "Hi! I'm DoughBot 🍰 How can I help you today? I can answer questions about our products, stock, prices, and more!");
+            appendMessage('bot', "Hi! I'm DoughBot 🍰 How can I help you today? I can answer questions about our products, stock, prices, and more! Ask me about our latest products!");
         }
         document.getElementById('chatInput').focus();
     }
