@@ -1,4 +1,5 @@
-// DreamDoughPH Admin AI Assistant
+// DreamDoughPH Admin AI Assistant - IMPROVED VERSION
+// Now with better product context including timestamps and more detailed analytics
 const ADMIN_GROQ_API_KEY = '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';
 const ADMIN_GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
@@ -7,22 +8,40 @@ let adminLastMessageTime = 0;
 const ADMIN_MESSAGE_COOLDOWN = 3000;
 
 async function getAdminContext() {
-    const context = { products: [], orders: [], revenue: 0, pendingOrders: 0, lowStockProducts: [] };
+    const context = { products: [], orders: [], revenue: 0, pendingOrders: 0, lowStockProducts: [], recentProducts: [] };
 
-    // Get products
+    // Get products with full details including timestamps
     const productsSnap = await database.ref('products').once('value');
+    const allProducts = [];
     productsSnap.forEach(child => {
         const p = child.val();
-        context.products.push({
+        allProducts.push({
             name: p.name,
             category: p.category,
             price: p.price,
-            stock: p.stock !== undefined ? p.stock : 'N/A'
+            stock: p.stock !== undefined ? p.stock : 'N/A',
+            description: p.description,
+            createdAt: p.createdAt,
+            updatedAt: p.updatedAt
         });
         if (p.stock !== undefined && p.stock <= 10) {
             context.lowStockProducts.push(`${p.name} (${p.stock} left)`);
         }
     });
+    
+    // Sort products by creation date to identify recent ones
+    allProducts.sort((a, b) => {
+        const dateA = new Date(a.createdAt || 0).getTime();
+        const dateB = new Date(b.createdAt || 0).getTime();
+        return dateB - dateA;
+    });
+    
+    // Get the 5 most recent products
+    context.recentProducts = allProducts.slice(0, 5).map(p => 
+        `${p.name} (${p.category}) - ₱${p.price} - Added: ${new Date(p.createdAt).toLocaleDateString('en-PH')}`
+    );
+    
+    context.products = allProducts;
 
     // Get orders
     const ordersSnap = await database.ref('orders').once('value');
@@ -46,8 +65,12 @@ async function getAdminContext() {
 
 function getAdminSystemPrompt(context) {
     const productList = context.products.map(p =>
-        `${p.name} (${p.category}) - ₱${p.price} - Stock: ${p.stock}`
+        `${p.name} (${p.category}) - ₱${p.price} - Stock: ${p.stock} - Added: ${new Date(p.createdAt).toLocaleDateString('en-PH')}`
     ).join('\n');
+
+    const recentProductsList = context.recentProducts.length > 0
+        ? context.recentProducts.join('\n')
+        : 'None';
 
     const orderList = context.orders.map(o =>
         `${o.customer} | ${o.status} | ${o.paymentStatus} | ₱${o.total} | Items: ${o.items} | Date: ${o.date}`
@@ -61,7 +84,10 @@ function getAdminSystemPrompt(context) {
 
 CURRENT BUSINESS DATA:
 
-PRODUCTS (${context.products.length} total):
+RECENT PRODUCTS (5 Most Recently Added):
+${recentProductsList}
+
+ALL PRODUCTS (${context.products.length} total):
 ${productList}
 
 ALL ORDERS (${context.orders.length} total):
@@ -79,14 +105,18 @@ YOUR CAPABILITIES:
 - Summarize order statuses
 - Answer questions about specific products or orders
 - Give business insights and suggestions
+- Track which products are newly added
+- Provide product performance analysis
 
 YOUR RULES:
 - Only discuss bakery business related topics
 - Be concise and give actionable insights
 - Use data above to answer accurately
+- When asked about new or recent products, refer to the "RECENT PRODUCTS" section
 - If asked about something not in the data, say you don't have that info
 - You CANNOT modify, add or delete products or orders - you are read-only
-- Format numbers with peso sign and commas where appropriate`;
+- Format numbers with peso sign and commas where appropriate
+- When analyzing product performance, consider both sales volume and stock levels`;
 }
 
 async function sendAdminMessage() {
@@ -183,7 +213,7 @@ function toggleAdminChat() {
     } else {
         widget.classList.add('open');
         if (adminChatHistory.length === 0) {
-            appendAdminMessage('bot', "Hi Admin! 👋 I'm your AI assistant. Ask me anything about your products, orders, stock, or revenue!");
+            appendAdminMessage('bot', "Hi Admin! 👋 I'm your AI assistant. Ask me anything about your products, orders, stock, revenue, or recent additions!");
         }
         document.getElementById('adminChatInput').focus();
     }
