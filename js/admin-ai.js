@@ -1,5 +1,5 @@
-// DreamDoughPH Admin AI Assistant - IMPROVED VERSION
-// Now with better product context including timestamps and more detailed analytics
+
+
 const ADMIN_GROQ_API_KEY = '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';
 const ADMIN_GROQ_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
@@ -10,7 +10,6 @@ const ADMIN_MESSAGE_COOLDOWN = 3000;
 async function getAdminContext() {
     const context = { products: [], orders: [], revenue: 0, pendingOrders: 0, lowStockProducts: [], recentProducts: [] };
 
-    // Get products with full details including timestamps
     const productsSnap = await database.ref('products').once('value');
     const allProducts = [];
     productsSnap.forEach(child => {
@@ -29,21 +28,21 @@ async function getAdminContext() {
         }
     });
     
-    // Sort products by creation date to identify recent ones
+    
     allProducts.sort((a, b) => {
         const dateA = new Date(a.createdAt || 0).getTime();
         const dateB = new Date(b.createdAt || 0).getTime();
         return dateB - dateA;
     });
     
-    // Get the 5 most recent products
+    
     context.recentProducts = allProducts.slice(0, 5).map(p => 
         `${p.name} (${p.category}) - ₱${p.price} - Added: ${new Date(p.createdAt).toLocaleDateString('en-PH')}`
     );
     
     context.products = allProducts;
 
-    // Get orders
+    
     const ordersSnap = await database.ref('orders').once('value');
     ordersSnap.forEach(child => {
         const o = child.val();
