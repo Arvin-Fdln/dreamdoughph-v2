@@ -1128,6 +1128,7 @@ const secretCode = 'openadmin';
 let secretTimeout;
 
 document.addEventListener('keypress', (e) => {
+        if (window.self !== window.top) return; // ← added this
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
         return;
     }
@@ -1496,6 +1497,7 @@ document.addEventListener('keyup', function(e) {
 });
 // ===== DOUBLE-TAP EASTER EGG FOR "FILIPINO" WORD =====
 document.addEventListener('DOMContentLoaded', function() {
+        if (window.self !== window.top) return; // ← added this
     const secretWords = document.querySelectorAll('.secret-word');
     let lastTapTime = 0;
     let lastTappedElement = null;
