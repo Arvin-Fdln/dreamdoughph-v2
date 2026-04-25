@@ -1,4 +1,4 @@
-/* --- Card Flexbox Fix for Alignment --- */
+
 .order-card {
     display: flex;
     flex-direction: column;
@@ -10,7 +10,7 @@
 .card-footer {
     flex-shrink: 0;
 }
-/* Admin Dashboard Styles - PROFESSIONAL REDESIGN */
+
 :root {
     --cream: #F5E6D3;
     --brown: #2C3E50;
@@ -48,7 +48,7 @@ body {
     line-height: 1.4;
 }
 
-/* ============= SIDEBAR - PROFESSIONAL ============= */
+
 .sidebar {
     width: var(--sidebar-width);
     background: #2C3E50;
@@ -169,7 +169,7 @@ body {
     border-color: #E74C3C;
 }
 
-/* ============= MAIN CONTENT ============= */
+
 .main-content {
     flex: 1;
     display: flex;
@@ -218,7 +218,7 @@ body {
     position: relative;
 }
 
-/* User Dropdown Styles */
+
 .user-dropdown {
     position: relative;
     display: inline-block;
@@ -333,12 +333,12 @@ body {
     margin: 0.25rem 0;
 }
 
-/* Hide the old user info */
+
 .user-info {
     display: none;
 }
 
-/* ============= LIVE TIMER - PROFESSIONAL ============= */
+
 .live-timer {
     display: flex;
     flex-direction: column;
@@ -382,7 +382,7 @@ body {
     font-weight: 600;
 }
 
-/* ============= CONTENT SECTIONS ============= */
+
 .content-section {
     display: none;
     flex: 1;
@@ -394,7 +394,7 @@ body {
     display: block;
 }
 
-/* ============= DASHBOARD - DARK THEME ============= */
+
 .dashboard-container {
     max-width: 100%;
     background: transparent;
@@ -441,7 +441,7 @@ body {
     opacity: 1;
 }
 
-/* REMOVED "Today" badges */
+
 .stat-period {
     display: none;
 }
@@ -479,7 +479,7 @@ body {
     margin-top: 0.25rem;
 }
 
-/* Specific card colors for icons */
+
 .stat-card:nth-child(1) .stat-icon {
     color: #3498DB;
     filter: drop-shadow(0 2px 4px rgba(52, 152, 219, 0.3));
@@ -500,7 +500,7 @@ body {
     filter: drop-shadow(0 2px 4px rgba(231, 76, 60, 0.3));
 }
 
-/* Responsive design */
+
 @media (max-width: 1200px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -525,7 +525,7 @@ body {
     }
 }
 
-/* Loading animation */
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -556,7 +556,7 @@ body {
 .stat-card:nth-child(4) {
     animation-delay: 0.4s;
 }
-/* ============= DASHBOARD SPLIT LAYOUT ============= */
+
 .dashboard-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -565,7 +565,7 @@ body {
 }
 
 .recent-section, .preview-section {
-    /* Match the stat-card styling for a unified dashboard look */
+    
     background: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
     padding: 1.5rem;
     border-radius: 8px;
@@ -579,12 +579,12 @@ body {
     color: #ffffff;
     font-size: 1.1rem;
     font-weight: 600;
-    /* stronger divider to clearly separate header from content on dark background */
+    
     border-bottom: 3px solid rgba(255,255,255,0.14);
     padding-bottom: 0.75rem;
 }
 
-/* Make sure small sub-headers or labels inside these sections also have subtle separators */
+
 .recent-section .order-item + .order-item,
 .preview-section .website-preview-frame {
     border-top: 1px solid rgba(255,255,255,0.04);
@@ -633,7 +633,7 @@ body {
     border-radius: 4px;
 }
 
-/* Recent Orders List Styles */
+
 .orders-list {
     display: flex;
     flex-direction: column;
@@ -717,7 +717,7 @@ body {
     display: none;
 }
 
-/* ============= ORDERS - PROFESSIONAL DESIGN ============= */
+
 .orders-header-controls {
     display: flex;
     justify-content: space-between;
@@ -760,7 +760,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* Order sections */
+
 .order-section-container {
     background: white;
     border-radius: 8px;
@@ -832,7 +832,7 @@ body {
     max-height: 0;
 }
 
-/* Status-specific styling */
+
 .order-section-container.status-pending .order-section-header {
     border-left: 4px solid var(--warning);
 }
@@ -853,7 +853,7 @@ body {
     border-left: 4px solid #FFA726;
 }
 
-/* ============= TABLES - PROFESSIONAL ============= */
+
 .orders-table, .products-table {
     background: white;
     border-radius: 0 0 8px 8px;
@@ -904,7 +904,7 @@ tbody tr:hover {
     font-style: italic;
 }
 
-/* ============= ACTION BUTTONS ============= */
+
 .action-buttons {
     display: flex;
     gap: 0.5rem;
@@ -943,7 +943,7 @@ tbody tr:hover {
     transform: translateY(-1px);
 }
 
-/* ============= FILTERS AND SEARCH ============= */
+
 .filters {
     display: flex;
     gap: 1rem;
@@ -977,7 +977,7 @@ tbody tr:hover {
     min-width: 150px;
 }
 
-/* ============= BUTTONS ============= */
+
 .btn-primary, .btn-secondary {
     padding: 0.75rem 1.5rem;
     border: none;
@@ -1009,7 +1009,7 @@ tbody tr:hover {
     transform: translateY(-1px);
 }
 
-/* ============= ANALYTICS STYLES ============= */
+
 .date-filter-bar {
     background: white;
     padding: 1.5rem;
@@ -1153,7 +1153,7 @@ tbody tr:hover {
     justify-content: center;
 }
 
-/* Order Summary Stats Grid */
+
 .summary-stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1215,7 +1215,7 @@ tbody tr:hover {
     color: var(--success);
 }
 
-/* Top Products List */
+
 .top-products-list {
     display: flex;
     flex-direction: column;
@@ -1270,7 +1270,7 @@ tbody tr:hover {
     font-size: 1rem;
 }
 
-/* ============= SETTINGS STYLES ============= */
+
 .settings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -1327,7 +1327,7 @@ tbody tr:hover {
     transform: translateY(-1px);
 }
 
-/* Form styles */
+
 .form-group {
     margin-bottom: 1.25rem;
 }
@@ -1373,7 +1373,7 @@ tbody tr:hover {
     border-top: 1px solid #E0E0E0;
 }
 
-/* Store hours */
+
 .hours-display {
     background: #F8F9FA;
     padding: 1.25rem;
@@ -1392,7 +1392,7 @@ tbody tr:hover {
     font-style: italic;
 }
 
-/* Social links */
+
 .social-links-list {
     display: flex;
     flex-direction: column;
@@ -1483,7 +1483,7 @@ tbody tr:hover {
     display: block;
 }
 
-/* ============= MODAL STYLES ============= */
+
 .modal {
     display: none !important;
     position: fixed;
@@ -1554,7 +1554,7 @@ tbody tr:hover {
     padding-bottom: 0.75rem;
 }
 
-/* ============= LOADING AND TOAST ============= */
+
 .loading-spinner {
     display: none;
     position: fixed;
@@ -1628,7 +1628,7 @@ tbody tr:hover {
     border-left-color: #C0392B;
 }
 
-/* ============= SUPER RESPONSIVE DESIGN ============= */
+
 @media (max-width: 1200px) {
     .dashboard-split {
         grid-template-columns: 1fr;
@@ -1907,7 +1907,7 @@ tbody tr:hover {
     }
 }
 
-/* Landscape mobile optimization */
+
 @media (max-height: 500px) and (orientation: landscape) {
     .sidebar {
         padding: 0.5rem 0;
@@ -1923,7 +1923,7 @@ tbody tr:hover {
     }
 }
 
-/* Better touch targets for mobile */
+
 @media (max-width: 768px) {
     button, a, .nav-item {
         min-height: 44px;
@@ -1931,13 +1931,13 @@ tbody tr:hover {
     }
 }
 
-/* Smooth scrolling */
+
 * {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
 }
 
-/* ============= SETTINGS TOGGLES ============= */
+
 .settings-toggle {
     display: flex;
     justify-content: space-between;
@@ -1991,7 +1991,7 @@ input:checked + .toggle-slider:before {
     transform: translateX(26px);
 }
 
-/* ============= SIMPLIFIED ORDER MODAL STYLES ============= */
+
 .customer-card {
     display: flex;
     align-items: center;
@@ -2085,7 +2085,7 @@ input:checked + .toggle-slider:before {
     color: #2C3E50;
 }
 
-/* Quick Actions */
+
 .quick-actions {
     margin-bottom: 1.5rem;
 }
@@ -2142,7 +2142,7 @@ input:checked + .toggle-slider:before {
     border: 2px solid #DC3545;
 }
 
-/* Status Section */
+
 .status-section {
     background: #F8F9FA;
     padding: 1.5rem;
@@ -2175,7 +2175,7 @@ input:checked + .toggle-slider:before {
 .status-select option[value="completed"] { color: #0C5460; }
 .status-select option[value="cancelled"] { color: #721C24; }
 
-/* Customer Message Section */
+
 .customer-message-section {
     background: #FFF9F0;
     padding: 1.5rem;
@@ -2189,7 +2189,7 @@ input:checked + .toggle-slider:before {
     font-weight: 600;
 }
 
-/* Make sure dashboard sections are properly spaced */
+
 .dashboard-sections {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2211,7 +2211,7 @@ input:checked + .toggle-slider:before {
     border: 1px solid #E0E0E0;
 }
 
-/* Add a visible divider under the section headings to separate title from content */
+
 .timeline-section h3, .payment-overview h3 {
     font-size: 1.14rem;
     font-weight: 600;
@@ -2226,7 +2226,7 @@ input:checked + .toggle-slider:before {
     grid-column: 1 / -1;
 }
 
-/* ============= TIMELINE STYLES ============= */
+
 .timeline-filters {
     display: flex;
     gap: 0.5rem;
@@ -2297,7 +2297,7 @@ input:checked + .toggle-slider:before {
     gap: 0.5rem;
 }
 
-/* ============= QUICK ACTIONS PANEL ============= */
+
 .quick-action-buttons {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -2340,7 +2340,7 @@ input:checked + .toggle-slider:before {
     color: white;
 }
 
-/* ============= PAYMENT OVERVIEW ============= */
+
 .payment-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2393,7 +2393,7 @@ input:checked + .toggle-slider:before {
     font-weight: 600;
 }
 
-/* ============= TEMPLATE MANAGER STYLES ============= */
+
 .template-manager {
     display: grid;
     grid-template-columns: 200px 1fr;
@@ -2469,7 +2469,7 @@ input:checked + .toggle-slider:before {
     font-size: 0.8rem;
 }
 
-/* ============= PAYMENT STATUS IN ORDERS ============= */
+
 .payment-status {
     padding: 0.3rem 0.8rem;
     border-radius: 12px;
@@ -2493,7 +2493,7 @@ input:checked + .toggle-slider:before {
     color: #0C5460;
 }
 
-/* ============= PRODUCT PERFORMANCE STYLES ============= */
+
 .performance-filters {
     display: flex;
     gap: 0.5rem;
@@ -2551,7 +2551,7 @@ input:checked + .toggle-slider:before {
     color: #6C757D;
 }
 
-/* ============= PERFORMANCE METRICS STYLES ============= */
+
 .metrics-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2592,7 +2592,7 @@ input:checked + .toggle-slider:before {
     font-weight: 600;
 }
 
-/* ============= PRODUCT PERFORMANCE CHARTS ============= */
+
 .performance-chart {
     margin-top: 1rem;
 }
@@ -2618,7 +2618,7 @@ input:checked + .toggle-slider:before {
     border-radius: 50%;
 }
 
-/* ============= RESPONSIVE DESIGN ============= */
+
 @media (max-width: 768px) {
     .performance-item {
         grid-template-columns: 1fr;
@@ -2637,7 +2637,7 @@ input:checked + .toggle-slider:before {
     }
 }
 
-/* ============= FINAL POLISH STYLES ============= */
+
 .quick-stats-widget {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -2689,7 +2689,7 @@ input:checked + .toggle-slider:before {
     font-weight: 600;
 }
 
-/* Enhanced loading states */
+
 .loading-pulse {
     animation: pulse 1.5s ease-in-out infinite;
 }
@@ -2699,7 +2699,7 @@ input:checked + .toggle-slider:before {
     50% { opacity: 0.7; }
 }
 
-/* Success/Error states */
+
 .status-success {
     border-left-color: #27AE60 !important;
     background: linear-gradient(90deg, #D4EDDA, transparent) !important;
@@ -2715,7 +2715,7 @@ input:checked + .toggle-slider:before {
     background: linear-gradient(90deg, #F8D7DA, transparent) !important;
 }
 
-/* Print styles for orders */
+
 @media print {
     .sidebar, .top-header, .btn-primary, .btn-secondary, .action-buttons {
         display: none !important;
@@ -2732,7 +2732,7 @@ input:checked + .toggle-slider:before {
     }
 }
 
-/* Keyboard shortcuts hint */
+
 .keyboard-shortcut {
     background: #2C3E50;
     color: white;
@@ -2743,7 +2743,7 @@ input:checked + .toggle-slider:before {
     margin-left: 0.5rem;
 }
 
-/* Dark mode support (future-proof) */
+
 @media (prefers-color-scheme: dark) {
     .stat-card, .recent-section, .preview-section {
         background: #2C3E50;
@@ -2752,7 +2752,7 @@ input:checked + .toggle-slider:before {
     }
 }
 
-/* Mobile optimizations */
+
 @media (max-width: 768px) {
     .quick-stats-widget {
         grid-template-columns: 1fr;
@@ -2769,7 +2769,7 @@ input:checked + .toggle-slider:before {
     }
 }
 
-/* Accessibility improvements */
+
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.01ms !important;
@@ -2778,13 +2778,13 @@ input:checked + .toggle-slider:before {
     }
 }
 
-/* Focus states for keyboard navigation */
+
 button:focus, a:focus, input:focus, select:focus, textarea:focus {
     outline: 2px solid #3498DB;
     outline-offset: 2px;
 }
 
-/* High contrast mode support */
+
 @media (prefers-contrast: high) {
     .stat-card {
         border: 2px solid #000;
@@ -2797,7 +2797,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* ============= CUSTOM ORDERS STYLES ============= */
+
 .custom-actions {
     display: flex;
     gap: 0.75rem;
@@ -2824,7 +2824,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     transform: translateY(-1px);
 }
 
-/* Custom Order Details */
+
 .reference-image-section {
     margin-bottom: 1.5rem;
     padding: 1.5rem;
@@ -2914,7 +2914,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-size: 0.8rem;
 }
 
-/* Custom order status badges */
+
 .status-pending_quote {
     background: #FFF3CD;
     color: #856404;
@@ -2925,7 +2925,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     color: #0C5460;
 }
 
-/* Image fullscreen modal */
+
 #imageFullscreenModal .modal-content {
     background: transparent !important;
     box-shadow: none !important;
@@ -2952,7 +2952,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     background: rgba(0,0,0,0.5);
 }
 
-/* Custom order item in table */
+
 .custom-order-indicator {
     display: inline-block;
     background: #9B59B6;
@@ -2965,13 +2965,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     text-transform: uppercase;
 }
 
-/* Payment status for custom orders */
+
 .payment-quoted {
     background: #E8DAEF;
     color: #6C3483;
 }
 
-/* Status-specific colors for custom orders */
+
 .order-section-container.status-pending_quote .order-section-header {
     border-left: 4px solid #FFC107;
 }
@@ -2980,7 +2980,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     border-left: 4px solid #17A2B8;
 }
 
-/* ============= CUSTOM ORDERS CARD LAYOUT ============= */
+
 .custom-filters {
     display: flex;
     gap: 1rem;
@@ -3025,7 +3025,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     letter-spacing: 0.5px;
 }
 
-/* Custom Orders Grid */
+
 .custom-orders-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -3060,7 +3060,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     background: linear-gradient(90deg, #3498DB 0%, #9B59B6 100%);
 }
 
-/* Card Header */
+
 .card-header {
     padding: 1.25rem;
     border-bottom: 1px solid #F0F0F0;
@@ -3100,7 +3100,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     color: #7F8C8D;
 }
 
-/* Order Meta */
+
 .order-meta {
     display: flex;
     justify-content: space-between;
@@ -3122,7 +3122,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     color: #2C3E50;
 }
 
-/* Card Content */
+
 .card-content {
     padding: 1.25rem;
 }
@@ -3171,7 +3171,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-size: 0.9rem;
 }
 
-/* Order Details */
+
 .order-details-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -3200,7 +3200,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-weight: 600;
 }
 
-/* Design Preview */
+
 .design-preview {
     margin: 1rem 0;
     padding: 1rem;
@@ -3230,7 +3230,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     text-overflow: ellipsis;
 }
 
-/* Card Footer */
+
 .card-footer {
     padding: 1rem 1.25rem;
     border-top: 1px solid #F0F0F0;
@@ -3240,7 +3240,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     align-items: center;
 }
 
-/* Status Badges for Cards */
+
 .status-badge-card {
     padding: 0.4rem 1rem;
     border-radius: 20px;
@@ -3292,7 +3292,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     border: 1px solid #DC3545;
 }
 
-/* Price Display */
+
 .price-display {
     font-weight: 700;
     font-size: 1.1rem;
@@ -3312,7 +3312,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     color: #7F8C8D;
 }
 
-/* Action Buttons for Cards */
+
 .card-actions {
     display: flex;
     gap: 0.5rem;
@@ -3352,7 +3352,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     border-color: #BDC3C7;
 }
 
-/* Empty State for Grid */
+
 .custom-orders-grid.empty {
     display: flex;
     flex-direction: column;
@@ -3371,12 +3371,12 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     margin-bottom: 1rem;
 }
 
-/* List View */
+
 .custom-orders-list {
     display: none;
 }
 
-/* Responsive Design for Cards */
+
 @media (max-width: 1200px) {
     .custom-orders-grid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -3429,7 +3429,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* ============= REGULAR ORDER CARDS ============= */
+
 .bulk-confirm-btn {
     display: flex;
     align-items: center;
@@ -3470,7 +3470,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     transform: translateY(-1px);
 }
 
-/* Order-specific card styles */
+
 .order-card {
     background: white;
     border-radius: 12px;
@@ -3498,7 +3498,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     background: linear-gradient(90deg, #27AE60 0%, #3498DB 100%);
 }
 
-/* Order items display */
+
 .order-items-summary {
     margin: 1rem 0;
     padding: 1rem;
@@ -3557,7 +3557,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-style: italic;
 }
 
-/* Payment status on cards */
+
 .payment-status-card {
     display: inline-flex;
     align-items: center;
@@ -3582,7 +3582,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     border: 1px solid #FFC107;
 }
 
-/* Order total display */
+
 .order-total-card {
     font-weight: 700;
     font-size: 1.25rem;
@@ -3595,7 +3595,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     color: #7F8C8D;
 }
 
-/* Order type indicator */
+
 .order-type-indicator {
     position: absolute;
     top: 1rem;
@@ -3614,7 +3614,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     background: #3498DB;
 }
 
-/* Delivery/Pickup info */
+
 .delivery-info {
     display: flex;
     align-items: center;
@@ -3632,7 +3632,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-size: 1rem;
 }
 
-/* Order card actions */
+
 .card-action-btn.warning {
     background: #FFC107;
     color: #856404;
@@ -3651,7 +3651,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     background: #C82333;
 }
 
-/* Responsive adjustments for order cards */
+
 @media (max-width: 1200px) {
     .custom-stats-bar {
         grid-template-columns: repeat(3, 1fr);
@@ -3691,9 +3691,9 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* ============= FIX CARD LAYOUT ISSUES ============= */
 
-/* Fix card height and overflow */
+
+
 .order-card, .custom-order-card {
     min-height: 300px;
     height: auto;
@@ -3701,13 +3701,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     flex-direction: column;
 }
 
-/* Fix card content layout */
+
 .card-content {
     flex: 1;
     overflow: hidden;
 }
 
-/* Fix button sizes and spacing */
+
 .card-actions {
     display: flex;
     gap: 0.5rem;
@@ -3723,7 +3723,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     justify-content: center;
 }
 
-/* Fix font overlapping in cards */
+
 .card-header {
     min-height: 80px;
 }
@@ -3744,14 +3744,14 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     gap: 0.5rem;
 }
 
-/* Fix order meta layout */
+
 .order-meta {
     font-size: 0.75rem;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
 
-/* Fix order items summary */
+
 .order-items-summary {
     max-height: 150px;
     overflow-y: auto;
@@ -3762,7 +3762,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     overflow-y: auto;
 }
 
-/* Fix item summary text */
+
 .item-name-small {
     font-size: 0.8rem;
     line-height: 1.2;
@@ -3774,7 +3774,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     line-height: 1.1;
 }
 
-/* Fix status badges in cards */
+
 .status-badge-card {
     padding: 0.25rem 0.6rem;
     font-size: 0.7rem;
@@ -3786,29 +3786,29 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-size: 0.65rem;
 }
 
-/* Fix total amount display */
+
 .order-total-card {
     font-size: 1rem;
     white-space: nowrap;
 }
 
-/* ============= MOBILE OPTIMIZATIONS ============= */
+
 
 @media (max-width: 768px) {
-    /* Grid layout for mobile */
+    
     .custom-orders-grid, #ordersGrid {
         grid-template-columns: 1fr;
         gap: 1rem;
         padding: 0.5rem;
     }
     
-    /* Card layout for mobile */
+    
     .order-card, .custom-order-card {
         margin: 0;
         border-radius: 8px;
     }
     
-    /* Card header mobile optimization */
+    
     .card-header {
         padding: 1rem;
     }
@@ -3835,7 +3835,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         gap: 0.25rem;
     }
     
-    /* Card content mobile optimization */
+    
     .card-content {
         padding: 1rem;
     }
@@ -3857,7 +3857,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 0.8rem;
     }
     
-    /* Card footer mobile optimization */
+    
     .card-footer {
         flex-direction: column;
         gap: 1rem;
@@ -3875,7 +3875,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 0.7rem;
     }
     
-    /* Status and price layout */
+    
     .card-footer > div:first-child {
         display: flex;
         flex-direction: row;
@@ -3889,13 +3889,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 1.1rem;
     }
     
-    /* Fix action buttons for mobile touch */
+    
     .card-action-btn {
         min-height: 36px;
         padding: 0.6rem;
     }
     
-    /* Fix filter section for mobile */
+    
     .custom-actions {
         flex-direction: column;
         gap: 0.5rem;
@@ -3911,7 +3911,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 0.9rem;
     }
     
-    /* Fix search and filter inputs */
+    
     .custom-filters {
         flex-direction: column;
         gap: 0.5rem;
@@ -3924,28 +3924,28 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Extra small mobile optimization */
+
 @media (max-width: 480px) {
-    /* Adjust card spacing */
+    
     .order-card, .custom-order-card {
         margin-bottom: 0.75rem;
     }
     
-    /* Reduce padding for small screens */
+    
     .card-header,
     .card-content,
     .card-footer {
         padding: 0.75rem;
     }
     
-    /* Smaller avatar for very small screens */
+    
     .customer-avatar-small {
         width: 30px;
         height: 30px;
         font-size: 0.8rem;
     }
     
-    /* Smaller text for very small screens */
+    
     .customer-details h4 {
         font-size: 0.8rem;
     }
@@ -3954,25 +3954,25 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 0.7rem;
     }
     
-    /* Adjust grid columns */
+    
     .order-details-grid {
         grid-template-columns: 1fr;
     }
     
-    /* Smaller action buttons */
+    
     .card-action-btn {
         font-size: 0.65rem;
         padding: 0.4rem 0.5rem;
     }
     
-    /* Adjust status badges */
+    
     .status-badge-card,
     .payment-status-card {
         font-size: 0.6rem;
         padding: 0.2rem 0.4rem;
     }
     
-    /* Fix order items overflow */
+    
     .order-items-summary,
     .items-list {
         max-height: 120px;
@@ -3983,7 +3983,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Fix hover effects for mobile (disable transform on mobile) */
+
 @media (max-width: 768px) {
     .order-card:hover,
     .custom-order-card:hover {
@@ -3991,7 +3991,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Fix for landscape orientation */
+
 @media (max-height: 500px) and (orientation: landscape) {
     .custom-orders-grid, #ordersGrid {
         grid-template-columns: repeat(2, 1fr);
@@ -4002,7 +4002,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Better touch targets for mobile */
+
 @media (max-width: 768px) {
     .card-action-btn,
     .view-toggle-btn,
@@ -4014,7 +4014,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Fix statistics bar for mobile */
+
 @media (max-width: 768px) {
     .custom-stats-bar {
         flex-direction: column;
@@ -4034,7 +4034,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Fix modal content for mobile */
+
 @media (max-width: 768px) {
     .modal-content {
         padding: 1rem;
@@ -4044,7 +4044,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Custom order specific fixes */
+
 .custom-order-card .design-preview {
     max-height: 60px;
     overflow: hidden;
@@ -4061,7 +4061,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     line-height: 1.3;
 }
 
-/* Fix image thumbnails */
+
 .reference-thumbnail {
     max-height: 120px;
     object-fit: cover;
@@ -4072,13 +4072,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-size: 0.8rem;
 }
 
-/* Fix price display */
+
 .price-display {
     font-size: 0.9rem;
     white-space: nowrap;
 }
 
-/* Mobile adjustments for custom orders */
+
 @media (max-width: 768px) {
     .custom-order-card .design-preview {
         padding: 0.75rem;
@@ -4097,9 +4097,9 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* ============= PRODUCT IMAGE IN ORDER CARDS ============= */
 
-/* Product image section in order cards */
+
+
 .product-image-section {
     margin-bottom: 1rem;
     text-align: center;
@@ -4116,7 +4116,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     display: block;
 }
 
-/* Loading state for images */
+
 .product-thumbnail.loading {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -4128,7 +4128,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     100% { background-position: -200% 0; }
 }
 
-/* Fallback for broken images */
+
 .product-thumbnail:before {
     content: '🍰';
     position: absolute;
@@ -4149,7 +4149,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     display: block;
 }
 
-/* Multiple items image grid */
+
 .multiple-products-grid .small-product-thumbnail {
     position: relative;
 }
@@ -4234,7 +4234,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     z-index: 1;
 }
 
-/* Grid layout for multiple products */
+
 .multiple-products-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -4250,22 +4250,22 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     border: 1px solid #E0E0E0;
 }
 
-/* Remove delivery info from cards (pickup time) */
+
 .delivery-info {
-    display: none; /* Hide pickup time from cards */
+    display: none; 
 }
 
-/* Card content adjustments for product images */
+
 .card-content {
     padding-top: 0.5rem;
 }
 
-/* Adjust card height for images */
+
 .order-card {
-    min-height: 320px; /* Slightly taller for images */
+    min-height: 320px; 
 }
 
-/* Mobile adjustments for product images */
+
 @media (max-width: 768px) {
     .product-thumbnail {
         height: 100px;
@@ -4299,7 +4299,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Fix statistics bar for mobile (5 items now) */
+
 @media (max-width: 768px) {
     .custom-stats-bar {
         display: grid;
@@ -4323,9 +4323,9 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* ============= MENU ITEMS SECTION - PROFESSIONAL DESIGN ============= */
 
-/* Section Header */
+
+
 .section-header {
     display: flex;
     justify-content: space-between;
@@ -4347,7 +4347,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-size: 0.9rem;
 }
 
-/* Add Item Button */
+
 .btn-add-item {
     display: flex;
     align-items: center;
@@ -4375,7 +4375,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-weight: 300;
 }
 
-/* Stats Cards */
+
 .menu-stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -4433,7 +4433,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     letter-spacing: 0.5px;
 }
 
-/* Filters */
+
 .menu-filters {
     display: flex;
     justify-content: space-between;
@@ -4508,7 +4508,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
 }
 
 
-/* Menu Items Grid */
+
 .menu-items-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -4516,7 +4516,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     margin-bottom: 2rem;
 }
 
-/* Menu Item Card */
+
 .menu-item-card {
     background: white;
     border-radius: 12px;
@@ -4683,7 +4683,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     transform: scale(1.05);
 }
 
-/* Empty State */
+
 .empty-state {
     grid-column: 1 / -1;
     text-align: center;
@@ -4718,7 +4718,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
 }
 
 
-/* Quick Stats */
+
 .quick-stats {
     display: flex;
     gap: 1rem;
@@ -4773,7 +4773,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     font-weight: 500;
 }
 
-/* Mobile Responsive */
+
 @media (max-width: 1200px) {
     .menu-stats-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -4848,13 +4848,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* ============= MOBILE RESPONSIVE FIXES ============= */
 
-/* ============= MOBILE SIDEBAR FIXES ============= */
 
-/* Mobile - up to 768px */
+
+
+
 @media (max-width: 768px) {
-    /* Fix sidebar positioning */
+    
     .sidebar {
         width: 280px !important;
         height: 100vh !important;
@@ -4874,14 +4874,14 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         transform: translateX(0) !important;
     }
     
-    /* Fix sidebar header visibility */
+    
     .sidebar-header {
         display: block !important;
         padding: 1.5rem !important;
         text-align: center !important;
     }
     
-    /* Fix sidebar navigation layout - VERTICAL */
+    
     .sidebar-nav {
         flex-direction: column !important;
         gap: 0.25rem !important;
@@ -4890,7 +4890,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         overflow-y: auto !important;
     }
     
-    /* Fix nav items - make them proper vertical buttons */
+    
     .nav-item {
         flex-direction: row !important;
         padding: 1rem 1.25rem !important;
@@ -4906,7 +4906,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         text-overflow: ellipsis !important;
     }
     
-    /* Remove hover effect that causes full height blue */
+    
     .nav-item:hover {
         background: #34495E !important;
         color: white !important;
@@ -4926,14 +4926,14 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         text-align: center !important;
     }
     
-    /* Show sidebar footer on mobile */
+    
     .sidebar-footer {
         display: block !important;
         padding: 1rem 1.5rem !important;
         margin-top: auto !important;
     }
     
-    /* Fix logout button */
+    
     .logout-btn {
         width: 100% !important;
         padding: 1rem !important;
@@ -4941,7 +4941,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         min-height: 56px !important;
     }
     
-    /* Add overlay when sidebar is open */
+    
     .sidebar-overlay {
         display: none;
         position: fixed;
@@ -4957,7 +4957,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         display: block;
     }
     
-    /* Fix main content when sidebar is open */
+    
     body.sidebar-open {
         overflow: hidden !important;
     }
@@ -4967,7 +4967,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         transition: transform 0.3s ease !important;
     }
     
-    /* Adjust header for mobile */
+    
     .top-header {
         position: fixed !important;
         top: 0 !important;
@@ -4980,7 +4980,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         background: white !important;
     }
     
-    /* Ensure menu toggle is visible */
+    
     .menu-toggle {
         display: flex !important;
         align-items: center !important;
@@ -4999,7 +4999,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         background: #F8F9FA !important;
     }
     
-    /* Fix main content area */
+    
     .main-content {
         margin-left: 0 !important;
         width: 100% !important;
@@ -5010,7 +5010,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         z-index: 1 !important;
     }
     
-    /* Show menu toggle button */
+    
     .menu-toggle {
         display: flex !important;
         align-items: center;
@@ -5018,7 +5018,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         margin-left: -0.5rem;
     }
     
-    /* Fix header for mobile */
+    
     .top-header {
         position: fixed !important;
         top: 0;
@@ -5036,28 +5036,28 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         max-width: 200px;
     }
     
-    /* Hide timer on mobile */
+    
     .live-timer {
         display: none;
     }
     
-    /* Fix content sections */
+    
     .content-section {
         padding: 1rem !important;
         width: 100% !important;
         overflow-x: hidden !important;
         margin-top: 0 !important;
-        min-height: calc(100vh - 60px); /* Full height minus header */
+        min-height: calc(100vh - 60px); 
     }
     
-    /* DASHBOARD SPECIFIC FIXES */
+    
     .dashboard-container {
         padding: 1rem !important;
         max-width: 100% !important;
         overflow-x: hidden !important;
     }
     
-    /* Stats grid - single column on mobile */
+    
     .stats-grid {
         grid-template-columns: 1fr !important;
         gap: 0.75rem !important;
@@ -5074,7 +5074,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 1.8rem !important;
     }
     
-    /* Dashboard split layout - single column */
+    
     .dashboard-split {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
@@ -5087,7 +5087,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         width: 100% !important;
     }
     
-    /* Hide website preview on mobile, show button */
+    
     .website-preview-frame {
         display: none !important;
     }
@@ -5105,7 +5105,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         cursor: pointer;
     }
     
-    /* Fix orders grid */
+    
     .custom-orders-grid, #ordersGrid, .menu-items-grid {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
@@ -5117,13 +5117,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         min-height: auto !important;
     }
     
-    /* Fix card content overflow */
+    
     .card-content, .menu-item-content {
         padding: 1rem !important;
         overflow: hidden !important;
     }
     
-    /* Fix action buttons */
+    
     .card-footer {
         flex-direction: column !important;
         gap: 0.75rem !important;
@@ -5141,7 +5141,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         margin-bottom: 0.5rem !important;
     }
     
-    /* Fix tables - make them scrollable */
+    
     table {
         display: block !important;
         overflow-x: auto !important;
@@ -5150,7 +5150,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         width: 100% !important;
     }
     
-    /* Fix modals for mobile */
+    
     .modal-content {
         width: 95% !important;
         max-width: 95% !important;
@@ -5159,7 +5159,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         max-height: 85vh !important;
     }
     
-    /* Fix filters and forms */
+    
     .filters, .custom-filters {
         flex-direction: column !important;
         gap: 0.75rem !important;
@@ -5170,25 +5170,25 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         min-height: 44px !important;
     }
     
-    /* Fix analytics layout */
+    
     .analytics-layout {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
     }
     
-    /* Fix settings grid */
+    
     .settings-grid {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
     }
     
-    /* Fix form rows */
+    
     .form-row {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
     }
     
-    /* Fix stats bars */
+    
     .custom-stats-bar {
         flex-direction: column !important;
         padding: 1rem !important;
@@ -5206,7 +5206,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         border-bottom: none !important;
     }
     
-    /* Fix action headers */
+    
     .orders-header-controls, .custom-actions {
         flex-direction: column !important;
         gap: 0.5rem !important;
@@ -5219,7 +5219,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         margin-bottom: 0.5rem !important;
     }
     
-    /* Fix section headers */
+    
     .section-header {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -5231,7 +5231,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 1.3rem !important;
     }
     
-    /* Fix menu filters */
+    
     .menu-filters {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -5243,7 +5243,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         max-width: 100% !important;
     }
     
-    /* Fix user dropdown on mobile */
+    
     .user-dropdown-content {
         position: fixed !important;
         top: 60px !important;
@@ -5254,13 +5254,13 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         margin: 0 auto !important;
     }
     
-    /* Ensure all interactive elements have proper touch targets */
+    
     button, a, .nav-item, input, select, textarea {
         min-height: 44px !important;
         min-width: 44px !important;
     }
     
-    /* Fix image containers */
+    
     .menu-item-image, .product-image-section {
         height: 180px !important;
     }
@@ -5269,14 +5269,14 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         height: 150px !important;
     }
     
-    /* Fix overflow in dashboard */
+    
     .dashboard-sections {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
     }
 }
 
-/* Small mobile - up to 480px */
+
 @media (max-width: 480px) {
     .top-header {
         padding: 0 0.75rem !important;
@@ -5308,14 +5308,14 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         height: 120px !important;
     }
     
-    /* Stack order info vertically */
+    
     .customer-info {
         flex-direction: column !important;
         align-items: flex-start !important;
         gap: 0.5rem !important;
     }
     
-    /* Fix toast notifications */
+    
     .toast {
         right: 0.5rem !important;
         left: 0.5rem !important;
@@ -5324,7 +5324,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
         font-size: 0.9rem !important;
     }
     
-    /* Fix modal buttons */
+    
     .form-actions, .settings-actions {
         flex-direction: column !important;
     }
@@ -5335,7 +5335,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Tablet - 768px to 1024px */
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr) !important;
@@ -5358,7 +5358,7 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Fix for iOS Safari viewport height */
+
 @supports (-webkit-touch-callout: none) {
     body, .sidebar, .main-content {
         height: -webkit-fill-available;
@@ -5366,18 +5366,18 @@ button:focus, a:focus, input:focus, select:focus, textarea:focus {
     }
 }
 
-/* Prevent horizontal scroll */
+
 html, body {
     max-width: 100%;
     overflow-x: hidden;
 }
 
-/* Ensure smooth scrolling */
+
 * {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Improve touch targets */
+
 @media (hover: none) and (pointer: coarse) {
     .nav-item, .btn, button, .card-action-btn {
         padding: 12px 16px !important;
@@ -5388,18 +5388,18 @@ html, body {
     }
 }
 
-/* ============= MOBILE DASHBOARD FIXES ============= */
 
-/* Mobile - up to 768px */
+
+
 @media (max-width: 768px) {
-    /* DASHBOARD SECTIONS FIX */
+    
     .dashboard-sections {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
         margin: 1rem 0 !important;
     }
     
-    /* TIMELINE SECTION FIX */
+    
     .timeline-section {
         padding: 1rem !important;
         min-height: auto !important;
@@ -5485,7 +5485,7 @@ html, body {
         text-align: center !important;
     }
     
-    /* PAYMENT STATUS SECTION FIX */
+    
     .payment-overview {
         padding: 1rem !important;
         min-height: auto !important;
@@ -5526,7 +5526,7 @@ html, body {
         font-size: 0.8rem !important;
     }
     
-    /* DASHBOARD SPLIT LAYOUT FIX */
+    
     .dashboard-split {
         grid-template-columns: 1fr !important;
         gap: 1rem !important;
@@ -5582,7 +5582,7 @@ html, body {
         font-size: 0.7rem !important;
     }
     
-    /* Website preview mobile button */
+    
     .preview-mobile-button {
         display: block !important;
         width: 100% !important;
@@ -5615,9 +5615,9 @@ html, body {
     }
 }
 
-/* Small mobile - up to 480px */
+
 @media (max-width: 480px) {
-    /* Timeline filters become scrollable on very small screens */
+    
     .timeline-filters {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -5632,7 +5632,7 @@ html, body {
         font-size: 0.7rem !important;
     }
     
-    /* Payment stats - single column */
+    
     .payment-stats {
         grid-template-columns: 1fr !important;
         gap: 0.5rem !important;
@@ -5661,7 +5661,7 @@ html, body {
         font-size: 0.75rem !important;
     }
     
-    /* Timeline items - better stacking */
+    
     .timeline-item {
         padding: 0.75rem !important;
     }
@@ -5675,17 +5675,17 @@ html, body {
         width: 100% !important;
     }
     
-    /* Order items - better stacking */
+    
     .order-item {
         padding: 0.625rem !important;
     }
     
-    /* Recent orders list height */
+    
     .orders-list {
         max-height: 180px !important;
     }
     
-    /* Mobile preview button */
+    
     .preview-mobile-button {
         padding: 0.875rem !important;
     }
@@ -5703,7 +5703,7 @@ html, body {
     }
 }
 
-/* Tablet - 769px to 1024px */
+
 @media (min-width: 769px) and (max-width: 1024px) {
     .dashboard-sections {
         grid-template-columns: 1fr 1fr !important;
@@ -5720,7 +5720,7 @@ html, body {
     }
 }
 
-/* Landscape mode optimization */
+
 @media (max-height: 500px) and (orientation: landscape) {
     .timeline-container {
         max-height: 150px !important;
@@ -5740,7 +5740,7 @@ html, body {
     }
 }
 
-/* FIX FOR MENU ITEMS GRID - Make it show as proper grid */
+
 .menu-items-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
@@ -5752,7 +5752,7 @@ html, body {
     display: grid !important;
 }
 
-/* Ensure menu item cards have proper dimensions */
+
 .menu-item-card {
     background: white;
     border-radius: 12px;
@@ -5765,7 +5765,7 @@ html, body {
     flex-direction: column;
 }
 
-/* Make sure images show properly */
+
 .menu-item-image {
     width: 100%;
     height: 200px;
@@ -5779,7 +5779,7 @@ html, body {
     object-fit: cover;
 }
 
-/* Custom Items Styles */
+
 .menu-item-notes {
     margin: 0.75rem 0;
     padding: 0.75rem;
@@ -5817,7 +5817,7 @@ html, body {
     background: rgba(155, 89, 182, 0.9) !important;
 }
 
-/* Custom items grid */
+
 #customItemsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -5834,7 +5834,7 @@ html, body {
     box-shadow: 0 8px 25px rgba(155, 89, 182, 0.15);
 }
 
-/* Responsive design for custom items */
+
 @media (max-width: 768px) {
     #customItemsGrid {
         grid-template-columns: 1fr;
@@ -5852,7 +5852,7 @@ html, body {
     }
 }
 
-/* Admin AI Assistant */
+
 .admin-chat-fab {
     position: fixed;
     bottom: 2rem;
@@ -5986,7 +5986,7 @@ html, body {
     background-color: #ffffff !important;
     -webkit-text-fill-color: #1e293b !important;
 }
-/* New Order Status Colors */
+
 .status-preparing {
     background: #fff3cd;
     color: #856404;

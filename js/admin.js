@@ -516,7 +516,7 @@ function closeModalByElement(modal) {
 
     const fnName = handlers[modal.id];
     if (fnName && typeof window[fnName] === 'function') {
-        try { window[fnName](); return; } catch (e) { /* fallthrough */ }
+        try { window[fnName](); return; } catch (e) {  }
     }
 
     // Fallback: just remove active class and reset forms inside
