@@ -190,7 +190,7 @@ function checkAuth() {
             console.log('✅ User logged in:', user.email);
         } else {
             console.log('❌ No user logged in');
-            window.location.href = 'login.html';
+            window.location.href = 'Login.html';
         }
     });
 }
@@ -2269,7 +2269,7 @@ function logout() {
         showLoading(true);
         auth.signOut().then(() => {
             console.log('✅ User logged out');
-            window.location.href = 'login.html';
+            window.location.href = 'Login.html';
         }).catch(error => {
             showToast('Error logging out: ' + error.message, 'error');
             showLoading(false);
